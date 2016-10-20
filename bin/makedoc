@@ -1,0 +1,116 @@
+#!/bin/sh
+
+#
+# Function Usage()
+#
+Usage()
+{
+  echo "Usage: $0 -pdf FILE..."
+}
+
+#
+# Function Error()
+#
+Error()
+{
+  echo "$@"
+  exit 1
+}
+
+#
+# Function PdfDoc()
+#
+PdfDoc()
+{
+  XML="$1"
+  PDF=`dirname "${XML}"`/`basename "${XML}" .xml`.pdf
+  FOP_PARAMS="-param admon.graphics 1 -param admon.graphics.path ${DOCBOOKXSL_HOME}/images/ -param admon.graphics.extension .svg"
+  if [ ! -f "${PDF}" -o "${XML}" -nt "${PDF}" ]; then
+    "${FOP}" $FOP_PARAMS -xml "${XML}" -xsl "${DOCBOOKXSL_FO}" -pdf "${PDF}"
+  fi
+}
+
+case "X$1" in
+  X|X-h|X-help|X--help)
+    Usage
+    exit 0
+    ;;
+esac
+
+#
+# MY_HOME: root directory of the lockss-docbook documentation bundle
+#
+MY_HOME=$(cd $(dirname "$0")/.. && pwd)
+
+#
+# FOP_HOME: use our own unless inherited from environment
+#
+if [ "X${FOP_HOME}" = "X" ]; then
+  FOP_HOME="${MY_HOME}/lib/fop"
+fi
+if [ ! -d "${FOP_HOME}" ]; then
+  Error "FOP_HOME: ${FOP_HOME} not found"
+fi
+
+#
+# FOP: FOP executable
+#
+FOP="${FOP_HOME}/fop"
+if [ ! -f "${FOP}" ]; then
+  Error "FOP: ${FOP} not found"
+fi
+if [ ! -x "${FOP}" ]; then
+  Error "FOP: ${FOP} not executable"
+fi
+
+#
+# DOCBOOKXSL_HOME: use our own unless inherited from environment
+#
+if [ "X${DOCBOOKXSL_HOME}" = "X" ]; then
+  DOCBOOKXSL_HOME="${MY_HOME}/lib/docbook-xsl-ns"
+fi
+if [ ! -d "${DOCBOOKXSL_HOME}" ]; then
+  Error "DOCBOOKXSL_HOME: ${DOCBOOKXSL_HOME} not found"
+fi
+
+#
+# Command line parser
+#
+while true ; do
+  case "$1" in
+    -pdf)
+      MODE="pdf"
+      shift
+      continue
+      ;;
+    -*)
+      Error "Error: Unknown option: $1"
+      ;;
+  esac
+  break
+done
+
+if [ "${MODE}" = "pdf" ]; then
+  #
+  # DOCBOOKXSL_FO
+  #
+  DOCBOOKXSL_FO="${DOCBOOKXSL_HOME}/fo/docbook.xsl"
+  if [ ! -f "${DOCBOOKXSL_FO}" ]; then
+    Error "DOCBOOKXSL_FO: ${DOCBOOKXSL_FO} not found"
+  fi
+else
+  Usage
+  Error "Unknown mode: ${MODE}"
+fi
+
+#
+# Dispatch
+#
+for f in "$@" ; do
+  if [ "${MODE}" = "pdf" ]; then
+    PdfDoc "$f"
+  else
+    # Shouldn't happen because checked above already
+    Error "Internal error: unknown mode: ${MODE}"
+  fi
+done
