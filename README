@@ -4,3 +4,6 @@ Run:
 
 on one or more DocBook XML files, and PDF files with corresponding names will be
 generated.
+
+Try it on the provided DocBook primer (docbook-quick-start.xml).
+
