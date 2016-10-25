@@ -12,74 +12,125 @@
     </authorgroup>
   </info>
 
-  <!-- INTRODUCTION -->
   <section xml:id="introduction">
 
     <title>Introduction</title>
 
-    <para><link xlink:href="http://docbook.org/">DocBook</link> version 5.0 is an XML language standardized by OASIS that describes documents such as articles and books. Tools exist that can translate DocBook input into intermediary formats like XSL Formatting Objects (XSL-FO) or output formats like PDF, PostScript, <command>man</command> pages, HTML Web sites, and more. This document describes a basic set of DocBook features that can be used to produce documentation and other technical documents.</para>
+    <para>
+      <link xlink:href="http://docbook.org/">DocBook</link> version 5.0 is an
+      XML language standardized by OASIS that describes documents such as
+      articles and books. Tools exist that can translate DocBook input into
+      intermediary formats like XSL Formatting Objects (XSL-FO) or output
+      formats like PDF, PostScript, <command>man</command> pages, HTML Web
+      sites, and more. This document describes a basic set of DocBook features
+      that can be used to produce documentation and other technical documents.
+    </para>
 
-    <!-- INTRODUCTION > USING THE LOCKSS-DOCBOOK PACKAGE -->
     <section xml:id="introduction-usingthelockssdocbookpackage">
 
       <title>Using the <package>lockss-docbook</package> Package</title>
 
-      <para>The <link xlink:href="http://www.lockss.org/">LOCKSS Team</link> has bundled up a tool chain to process DocBook documents into PDF documents using XSL Formatting Objects (XSL-FO) and Apache FOP 2.1. This <package>lockss-docbook</package> package can be found on GitHub at <link xlink:href="https://github.com/lockss/lockss-docbook" />.</para>
-      <para>To use it, you will need Java 6 or better and <command>git</command>.</para>
+      <para>
+        The <link xlink:href="http://www.lockss.org/">LOCKSS Team</link> has
+        bundled up a tool chain to process DocBook documents into PDF documents
+        using XSL Formatting Objects (XSL-FO) and Apache FOP 2.1. This
+        <package>lockss-docbook</package> package can be found on GitHub at
+        <link xlink:href="https://github.com/lockss/lockss-docbook" />.
+      </para>
+      <para>
+        To use it, you will need Java 6 or better and <command>git</command>.
+      </para>
       <procedure>
         <step>
-          <para>Clone the <package>lockss-docbook</package> project:</para>
+          <para>
+            Clone the <package>lockss-docbook</package> repository:
+          </para>
           <literallayout><userinput>git clone https://github.com/lockss/lockss-docbook</userinput></literallayout>
         </step>
         <step>
-          <para>Invoke <command>makedoc</command> (<filename>lockss-docbook/bin/makedoc</filename>) with the <option>-pdf</option> option on any number of DocBook XML files, which will generate PDF files with corresponding names:</para>
+          <para>
+            Invoke <command>makedoc</command> (<filename>lockss-docbook/bin/makedoc</filename>) with the <option>-pdf</option> option on any number of DocBook XML files, which will generate PDF files with corresponding names:
+          </para>
           <literallayout><userinput>makedoc -pdf <replaceable>myfile.xml</replaceable></userinput></literallayout>
         </step>
       </procedure>
 
     </section>
-    <!-- INTRODUCTION > USING THE LOCKSS-DOCBOOK PACKAGE -->
 
   </section>
-  <!-- INTRODUCTION -->
 
-  <!-- STRUCTURE -->
-  <section xml:id="structure">
+  <section xml:id="documentstructure">
 
-    <title>Structure</title>
+    <title>Document Structure</title>
 
-    <para>All DocBook documents begin with an XML preamble:</para>
+    <para>
+      All DocBook documents begin with an XML preamble:
+    </para>
     <programlisting><![CDATA[<?xml version="1.0" encoding="utf-8"?>]]></programlisting>
-    <para>You have a choice of top-level element:</para>
+    <para>
+      You have a choice of top-level elements:
+    </para>
     <itemizedlist>
       <listitem>
-        <para><tag>article</tag>: a single article or document (most likely)</para>
+        <para>
+          <tag>article</tag>: a single article or document (most likely)
+        </para>
       </listitem>
       <listitem>
-        <para><tag>book</tag>: a book; a book consists of <tag>chapter</tag> and <tag>part</tag> elements (and a part consists of <tag>chapter</tag> elements)</para>
+        <para>
+          <tag>book</tag>: a book; a book consists of <tag>chapter</tag> and
+          <tag>part</tag> elements (and a part consists of <tag>chapter</tag>
+          elements)
+        </para>
       </listitem>
       <listitem>
-        <para><tag>set</tag>: a collection of books; a set consists of <tag>book</tag> elements</para>
+        <para>
+          <tag>set</tag>: a collection of books; a set consists of
+          <tag>book</tag> elements
+        </para>
       </listitem>
     </itemizedlist>
-    <para>Whichever top-level element you choose (say <tag>article</tag>), declare the following namespaces:</para>
+    <para>
+      Whichever top-level element you choose (say <tag>article</tag>), declare
+      the following namespaces:
+    </para>
     <programlisting><![CDATA[<article xmlns="http://docbook.org/ns/docbook" version="5.0"
          xmlns:xlink="http://www.w3.org/1999/xlink">
   ...
 </article>]]></programlisting>
-    <para>The top-level tags <tag>set</tag>, <tag>book</tag>, <tag>part</tag>, <tag>chapter</tag> and <tag>article</tag> each begin with an <tag>info</tag> stanza with a rich vocabulary to describe bilbiographic metadata (title and subtitle, dates, publisher information...) and to attribute names, contact information and organizational affiliations to various kinds of contributors (author, collaborator, editor...). Without going into detail, the essential is to provide:</para>
+    <para>
+      The top-level tags <tag>set</tag>, <tag>book</tag>, <tag>part</tag>,
+      <tag>chapter</tag> and <tag>article</tag> each begin with an
+      <tag>info</tag> stanza with a rich vocabulary to describe bilbiographic
+      metadata (title and subtitle, dates, publisher information...) and to
+      attribute names, contact information and organizational affiliations to
+      various kinds of contributors (author, collaborator, editor...). Without
+      going into detail, the essential is to provide:
+    </para>
     <itemizedlist>
       <listitem>
-        <para>A title with <tag>title</tag></para>
+        <para>
+          A title with the <tag>title</tag> element
+        </para>
       </listitem>
       <listitem>
-        <para>An optional subtitle with <tag>subtitle</tag></para>
+        <para>
+          An optional subtitle with the <tag>subtitle</tag> element
+        </para>
       </listitem>
       <listitem>
-        <para>An author group with <tag>authorgroup</tag>, containing one or more <tag>author</tag> elements. At the simplest level, an <tag>author</tag> contains either the name of an organizational author with <tag>orgname</tag> or the name of an individual author with <tag>person</tag>.</para>
+        <para>
+          An author group with the <tag>authorgroup</tag> element, containing
+          one or more <tag>author</tag> elements. At the simplest level, an
+          <tag>author</tag> element contains either the name of an
+          organizational author with the <tag>orgname</tag> element or the name
+          of an individual author with the <tag>person</tag> element.
+        </para>
       </listitem>
     </itemizedlist>
-    <para>Example:</para>
+    <para>
+      Example:
+    </para>
     <programlisting><![CDATA[<info>
   <title>Main Title</title>
   <subtitle>The Subtitle Goes Here</subtitle>
@@ -92,9 +143,13 @@
     </author>
   </authorgroup>
 </info>]]></programlisting>
-
-    <para>The <tag>article</tag> and <tag>chapter</tag> elements are sub-divided into nested <code><![CDATA[<section>]]></code> elements that begin with a <tag>title</tag> and optional <tag>subtitle</tag>, followed by any number of content blocks:</para>
-      <programlisting><![CDATA[<section>
+    <para>
+      The <tag>article</tag> and <tag>chapter</tag> elements are sub-divided
+      into nested <code><![CDATA[<section>]]></code> elements that begin with a
+      <tag>title</tag> element and optional <tag>subtitle</tag> element,
+      followed by any number of content blocks:
+    </para>
+    <programlisting><![CDATA[<section>
   <title>First Section</title>
   ...
   <section>
@@ -112,9 +167,7 @@
 </section>]]></programlisting>
 
   </section>
-  <!-- STRUCTURE -->
 
-  <!-- ESSENTIAL CONTENT BLOCKS -->
   <section xml:id="essentialcontentblocks">
 
     <title>Essential Content Blocks</title>
@@ -233,4 +286,3 @@ MULTI-LINE:
   <!-- APPENDIX: CHEAT SHEET -->
 
 </article>
-
