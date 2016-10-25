@@ -29,11 +29,11 @@
       <procedure>
         <step>
           <para>Clone the <package>lockss-docbook</package> project:</para>
-          <para><userinput>git clone https://github.com/lockss/lockss-docbook</userinput></para>
+          <literallayout><userinput>git clone https://github.com/lockss/lockss-docbook</userinput></literallayout>
         </step>
         <step>
           <para>Invoke <command>makedoc</command> (<filename>lockss-docbook/bin/makedoc</filename>) with the <option>-pdf</option> option on any number of DocBook XML files, which will generate PDF files with corresponding names:</para>
-          <para><userinput>makedoc -pdf <replaceable>myfile.xml</replaceable></userinput></para>
+          <literallayout><userinput>makedoc -pdf <replaceable>myfile.xml</replaceable></userinput></literallayout>
         </step>
       </procedure>
 
@@ -53,30 +53,30 @@
     <para>You have a choice of top-level element:</para>
     <itemizedlist>
       <listitem>
-        <para><code><![CDATA[<article>]]></code>: a single article or document (most likely)</para>
+        <para><tag>article</tag>: a single article or document (most likely)</para>
       </listitem>
       <listitem>
-        <para><code><![CDATA[<book>]]></code>: a book; a book consists of <code><![CDATA[<chapter>]]></code> and <code><![CDATA[<part>]]></code> elements (and a part consists of <code><![CDATA[<chapter>]]></code> elements)</para>
+        <para><tag>book</tag>: a book; a book consists of <tag>chapter</tag> and <tag>part</tag> elements (and a part consists of <tag>chapter</tag> elements)</para>
       </listitem>
       <listitem>
-        <para><code><![CDATA[<set>]]></code>: a collection of books; a set consists of <code><![CDATA[<book>]]></code> elements</para>
+        <para><tag>set</tag>: a collection of books; a set consists of <tag>book</tag> elements</para>
       </listitem>
     </itemizedlist>
-    <para>Whichever top-level element you choose (say <code><![CDATA[<article>]]></code>), declare the following namespaces:</para>
+    <para>Whichever top-level element you choose (say <tag>article</tag>), declare the following namespaces:</para>
     <programlisting><![CDATA[<article xmlns="http://docbook.org/ns/docbook" version="5.0"
          xmlns:xlink="http://www.w3.org/1999/xlink">
   ...
 </article>]]></programlisting>
-    <para>The top-level tags <code><![CDATA[<set>]]></code>, <code><![CDATA[<book>]]></code>, <code><![CDATA[<part>]]></code>, <code><![CDATA[<chapter>]]></code> and <code><![CDATA[<article>]]></code> each begin with an <code><![CDATA[<info>]]></code> stanza with a rich vocabulary to describe bilbiographic metadata (title and subtitle, dates, publisher information...) and to attribute names, contact information and organizational affiliations to various kinds of contributors (author, collaborator, editor...). Without going into detail, the essential is to provide:</para>
+    <para>The top-level tags <tag>set</tag>, <tag>book</tag>, <tag>part</tag>, <tag>chapter</tag> and <tag>article</tag> each begin with an <tag>info</tag> stanza with a rich vocabulary to describe bilbiographic metadata (title and subtitle, dates, publisher information...) and to attribute names, contact information and organizational affiliations to various kinds of contributors (author, collaborator, editor...). Without going into detail, the essential is to provide:</para>
     <itemizedlist>
       <listitem>
-        <para>A title with <code><![CDATA[<title>]]></code></para>
+        <para>A title with <tag>title</tag></para>
       </listitem>
       <listitem>
-        <para>An optional subtitle with <code><![CDATA[<subtitle>]]></code></para>
+        <para>An optional subtitle with <tag>subtitle</tag></para>
       </listitem>
       <listitem>
-        <para>An author group with <code><![CDATA[<authorgroup>]]></code>, containing one or more <code><![CDATA[<author>]]></code> elements. At the simplest level, an <code><![CDATA[<author>]]></code> contains either the name of an organizational author with <code><![CDATA[<orgname>]]></code> or the name of an individual author with <code><![CDATA[<personname>]]></code>.</para>
+        <para>An author group with <tag>authorgroup</tag>, containing one or more <tag>author</tag> elements. At the simplest level, an <tag>author</tag> contains either the name of an organizational author with <tag>orgname</tag> or the name of an individual author with <tag>person</tag>.</para>
       </listitem>
     </itemizedlist>
     <para>Example:</para>
@@ -93,7 +93,7 @@
   </authorgroup>
 </info>]]></programlisting>
 
-    <para>The <code><![CDATA[<article>]]></code> and <code><![CDATA[<chapter>]]></code> elements are sub-divided into nested <code><![CDATA[<section>]]></code> elements that begin with a <code><![CDATA[<title>]]></code> and optional <code><![CDATA[<subtitle>]]></code>, followed by any number of content blocks:</para>
+    <para>The <tag>article</tag> and <tag>chapter</tag> elements are sub-divided into nested <code><![CDATA[<section>]]></code> elements that begin with a <tag>title</tag> and optional <tag>subtitle</tag>, followed by any number of content blocks:</para>
       <programlisting><![CDATA[<section>
   <title>First Section</title>
   ...
@@ -122,12 +122,12 @@
     <para>Sections are then made up of content blocks. DocBook provides a rich vocabulary of content structures, the most important of which are:</para>
     <itemizedlist>
       <listitem>
-        <para>Paragraphs with <code><![CDATA[<para>]]></code>:</para>
+        <para>Paragraphs with <tag>para</tag>:</para>
         <programlisting><![CDATA[<para>This is a paragraph.</para>
 <para>This is another paragraph.</para>]]></programlisting>
       </listitem>
       <listitem>
-        <para>Lists with <code><![CDATA[<itemizedlist>]]></code> or <code><![CDATA[<orderedlist>]]></code>, which then contain one or more <code><![CDATA[<listitem>]]></code> elements, each of which can contain whatever content (as little as a single paragraph):</para>
+        <para>Lists with <tag>itemizedlist</tag> or <tag>orderedlist</tag>, which then contain one or more <tag>listitem</tag> elements, each of which can contain whatever content (as little as a single paragraph):</para>
         <programlisting><![CDATA[<itemizedlist>
   <listitem>
     <para>First bullet in the list.</para>
@@ -141,7 +141,7 @@
 </itemizedlist>]]></programlisting>
       </listitem>
       <listitem>
-        <para>Asides in the form of <code><![CDATA[<note>]]></code>, <code><![CDATA[<tip>]]></code>, <code><![CDATA[<caution>]]></code>, <code><![CDATA[<warning>]]></code> or <code><![CDATA[<important>]]></code> stanzas, containing whatever content (as little as a single paragraph):</para>
+        <para>Asides in the form of <tag>note</tag>, <tag>tip</tag>, <tag>caution</tag>, <tag>warning</tag> or <tag>important</tag> stanzas, containing whatever content (as little as a single paragraph):</para>
         <programlisting><![CDATA[<note>
   <para>This is a note.</para>
 </note>]]></programlisting>
@@ -151,7 +151,7 @@
         </note>
       </listitem>
       <listitem>
-        <para>Verbatim listings in the form of a <code><![CDATA[<programlisting>]]></code> stanza. To make your life easier with less-than, greater-than and ampersand characters that are present in source code fragments, you may want to escape the contents of the <code><![CDATA[<programlisting>]]></code> between <code>&lt;![CDATA[</code> and <code>]]&gt;</code>.</para>
+        <para>Verbatim listings in the form of a <tag>programlisting</tag> stanza. To make your life easier with less-than, greater-than and ampersand characters that are present in source code fragments, you may want to escape the contents of the <tag>programlisting</tag> between <code>&lt;![CDATA[</code> and <code>]]&gt;</code>.</para>
         <programlisting>&lt;programlisting&gt;&lt;![CDATA[#!/bin/sh
 echo "This is a shell script"
 exit 1]]&gt;&lt;/programlisting&gt;</programlisting>
@@ -160,13 +160,13 @@ exit 1]]&gt;&lt;/programlisting&gt;</programlisting>
     <para>There is also a rich markup vocabulary inline, the most important being:</para>
     <itemizedlist>
       <listitem>
-        <para><code><![CDATA[<code>]]></code> for <code>literals</code>: code fragments, variable names, commands, etc.</para>
+        <para><tag>code</tag> for <code>literals</code>: code fragments, variable names, commands, etc.</para>
       </listitem>
       <listitem>
-        <para><code><![CDATA[<emphasis>]]></code> for <emphasis>emphasis</emphasis>: important words, term definitions, etc.</para>
+        <para><tag>emphasis</tag> for <emphasis>emphasis</emphasis>: important words, term definitions, etc.</para>
       </listitem>
       <listitem>
-        <para><code><![CDATA[<link>]]></code> for hyperlinks:</para>
+        <para><tag>link</tag> for hyperlinks:</para>
         <itemizedlist>
           <listitem>
             <para><code><![CDATA[<link xlink:href="http://docbook.org/">]]>DocBook<![CDATA[</link>]]></code> produces: <link xlink:href="http://docbook.org/">DocBook</link></para>
@@ -190,6 +190,47 @@ exit 1]]&gt;&lt;/programlisting&gt;</programlisting>
 
   </section>
   <!-- ELEMENT REFERENCE -->
+
+  <!-- APPENDIX: CHEAT SHEET -->
+  <appendix>
+
+    <title>Cheat Sheet</title>
+
+    <programlisting><![CDATA[
+SECTIONS:
+<section>                               <sect1>
+  <title>...</title>                      <title>...</title>
+  <subtitle>...</subtitle>                <subtitle>...</subtitle>
+  <section>                               <sect2>
+    <!-- arbitrarily nestable -->           <!-- nestable to <sect5> -->
+  </section>                              </sect2>
+</section>                              </sect1>
+
+LISTS:
+<itemizedlist>                          <orderedlist>
+  <lisitem>                               <listitem>
+    <!-- content blocks -->                 <!-- content blocks -->
+  </listitem>                             </listitem>
+</itemizedlist>                         </orderedlist>
+
+<procedure>
+  <step>
+    <!-- content blocks -->
+  </step>
+  <step performance="optional">
+    <!-- content blocks -->
+  </step>
+</procedure>
+
+MULTI-LINE:
+<programlisting>Fixed-width font,       <literallayout>Normal font,
+   but line breaks     and whitespace      but line breaks     and whitespace
+  are     preserved</programlisting>      are     preserved</literallayout>
+
+]]></programlisting>
+
+  </appendix>
+  <!-- APPENDIX: CHEAT SHEET -->
 
 </article>
 
