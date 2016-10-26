@@ -63,108 +63,139 @@
 
     <title>Document Structure</title>
 
-    <para>
-      All DocBook documents begin with an XML preamble:
-    </para>
-    <programlisting><![CDATA[<?xml version="1.0" encoding="utf-8"?>]]></programlisting>
-    <para>
-      You have a choice of top-level elements:
-    </para>
-    <itemizedlist>
-      <listitem>
-        <para>
-          <tag>article</tag>: a single article or document (most likely)
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          <tag>book</tag>: a book; a book consists of <tag>chapter</tag> and
-          <tag>part</tag> elements (and a part consists of <tag>chapter</tag>
-          elements)
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          <tag>set</tag>: a collection of books; a set consists of
-          <tag>book</tag> elements
-        </para>
-      </listitem>
-    </itemizedlist>
-    <para>
-      Whichever top-level element you choose (say <tag>article</tag>), declare
-      the following namespaces:
-    </para>
-    <programlisting><![CDATA[<article xmlns="http://docbook.org/ns/docbook" version="5.0"
+    <section xml:id="documentstructure-preamble">
+    
+      <title>Preamble</title>
+
+      <para>
+        All DocBook documents begin with an XML preamble:
+      </para>
+      <programlisting><![CDATA[<?xml version="1.0" encoding="utf-8"?>]]></programlisting>
+    
+    </section>
+    
+    <section xml:id="documentstructure-toplevelelement">
+    
+      <title>Top-Level Element</title>
+
+      <para>
+        You have a choice of top-level elements:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            <tag>article</tag>: a single article or document (most likely)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <tag>book</tag>: a book; a book consists of <tag>chapter</tag> and
+            <tag>part</tag> elements (and a <tag>part</tag> element consists of
+            <tag>chapter</tag> elements)
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            <tag>set</tag>: a collection of books; a <tag>set</tag> element
+            consists of <tag>book</tag> elements
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        Whichever top-level element you choose (say <tag>article</tag>), declare
+        the following namespaces:
+      </para>
+      <programlisting><![CDATA[<article xmlns="http://docbook.org/ns/docbook" version="5.0"
          xmlns:xlink="http://www.w3.org/1999/xlink">
   ...
 </article>]]></programlisting>
-    <para>
-      The top-level tags <tag>set</tag>, <tag>book</tag>, <tag>part</tag>,
-      <tag>chapter</tag> and <tag>article</tag> each begin with an
-      <tag>info</tag> stanza with a rich vocabulary to describe bilbiographic
-      metadata (title and subtitle, dates, publisher information...) and to
-      attribute names, contact information and organizational affiliations to
-      various kinds of contributors (author, collaborator, editor...). Without
-      going into detail, the essential is to provide:
-    </para>
-    <itemizedlist>
-      <listitem>
-        <para>
-          A title with the <tag>title</tag> element
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          An optional subtitle with the <tag>subtitle</tag> element
-        </para>
-      </listitem>
-      <listitem>
-        <para>
-          An author group with the <tag>authorgroup</tag> element, containing
-          one or more <tag>author</tag> elements. At the simplest level, an
-          <tag>author</tag> element contains either the name of an
-          organizational author with the <tag>orgname</tag> element or the name
-          of an individual author with the <tag>person</tag> element.
-        </para>
-      </listitem>
-    </itemizedlist>
-    <para>
-      Example:
-    </para>
-    <programlisting><![CDATA[<info>
-  <title>Main Title</title>
-  <subtitle>The Subtitle Goes Here</subtitle>
-  <authorgroup>
-    <author>
-      <personname>John H. Smith</personname>
-    </author>
-    <author>
-      <orgname>The MegaDocBook Foundation</orgname>
-    </author>
-  </authorgroup>
-</info>]]></programlisting>
-    <para>
-      The <tag>article</tag> and <tag>chapter</tag> elements are sub-divided
-      into nested <code><![CDATA[<section>]]></code> elements that begin with a
-      <tag>title</tag> element and optional <tag>subtitle</tag> element,
-      followed by any number of content blocks:
-    </para>
-    <programlisting><![CDATA[<section>
-  <title>First Section</title>
-  ...
-  <section>
-    <title>First Subsection</title>
+      <para>
+        The top-level tags <tag>set</tag>, <tag>book</tag>, <tag>part</tag>,
+        <tag>chapter</tag> and <tag>article</tag> each begin with an
+        <tag>info</tag> stanza with a rich vocabulary to describe bilbiographic
+        metadata (title and subtitle, dates, publisher information...) and to
+        attribute names, contact information and organizational affiliations to
+        various kinds of contributors (author, collaborator, editor...). Without
+        going into detail, the essential is to provide:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            A title with the <tag>title</tag> element
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            An optional subtitle with the <tag>subtitle</tag> element
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            An author group with the <tag>authorgroup</tag> element, containing
+            one or more <tag>author</tag> elements. At the simplest level, an
+            <tag>author</tag> element contains either the name of an
+            organizational author with the <tag>orgname</tag> element or the name
+            of an individual author with the <tag>person</tag> element.
+          </para>
+        </listitem>
+      </itemizedlist>
+      <example>
+        <title><tag>authorgroup</tag> example</title>
+        <programlisting><![CDATA[<info>
+    <title>Main Title</title>
+    <subtitle>The Subtitle Goes Here</subtitle>
+    <authorgroup>
+      <author>
+        <personname>John H. Smith</personname>
+      </author>
+      <author>
+        <orgname>The MegaDocBook Foundation</orgname>
+      </author>
+    </authorgroup>
+  </info>]]></programlisting>
+      </example>
+      
+    </section>
+    
+    <section xml:id="documentstructure-sections">
+    
+      <title>Sections</title>    
+
+      <para>
+        The <tag>article</tag> and <tag>chapter</tag> elements are sub-divided
+        into nested <code><![CDATA[<section>]]></code> elements that begin with a
+        <tag>title</tag> element and optional <tag>subtitle</tag> element,
+        followed by any number of content blocks:
+      </para>
+      <example>
+        <title><tag>section</tag> example</title>
+        <programlisting><![CDATA[<section>
+    <title>First Section</title>
     ...
+    <section>
+      <title>First Subsection</title>
+      ...
+    </section>
+    <section>
+      <title>Second Subsection</title>
+      ...
+    </section>
   </section>
   <section>
-    <title>Second Subsection</title>
+    <title>Second Section</title>
     ...
-  </section>
-</section>
-<section>
-  <title>Second Section</title>
-  ...
-</section>]]></programlisting>
+  </section>]]></programlisting>
+      </example>
+      <tip>
+        <para>
+          Alternatively, instead of arbitrarily-nestable <tag>section</tag>
+          elements, you can use the directly-nestable elements <tag>sect1</tag>,
+          <tag>sect2</tag>, <tag>sect3</tag>, <tag>sect4</tag> and
+          <tag>sect5</tag>.
+        </para>
+      </tip>
+
+    </section>
 
   </section>
 
@@ -172,69 +203,263 @@
 
     <title>Essential Content Blocks</title>
 
-    <para>Sections are then made up of content blocks. DocBook provides a rich vocabulary of content structures, the most important of which are:</para>
+    <para>
+      Each section is then made up of content blocks like paragraphs, lists,
+      verbatim text, asides, etc.. DocBook provides a rich vocabulary of content
+      structures. The most immediately useful ones are presented in this
+      section:
+    </para>
     <itemizedlist>
       <listitem>
-        <para>Paragraphs with <tag>para</tag>:</para>
-        <programlisting><![CDATA[<para>This is a paragraph.</para>
-<para>This is another paragraph.</para>]]></programlisting>
+        <para>
+          Paragraphs (<tag>para</tag>)
+        </para>
       </listitem>
       <listitem>
-        <para>Lists with <tag>itemizedlist</tag> or <tag>orderedlist</tag>, which then contain one or more <tag>listitem</tag> elements, each of which can contain whatever content (as little as a single paragraph):</para>
+        <para>
+          Lists (<tag>itemizedlist</tag>, <tag>orderedlist</tag>)
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Verbatim text (<tag>programlisting</tag>, <tag>literallayout</tag>)
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Asides (<tag>caution</tag>, <tag>important</tag>, <tag>note</tag>,
+          <tag>tip</tag>, <tag>warning</tag>)
+        </para>
+      </listitem>
+    </itemizedlist>
+    
+    <section xml:id="essentialcontentblocks-paragraphs">
+    
+      <title>Paragraphs (<tag>para</tag>)</title>
+      
+      <para>
+        The plainest content block is a paragraph, marked up with the
+        <tag>para</tag> tag. 
+      </para>
+      <example>
+        <title><tag>para</tag> example</title>
+        <programlisting><![CDATA[<para>
+  This is a paragraph.
+</para>
+<para>
+  This is another paragraph.
+</para>]]></programlisting>
+        <blockquote>
+          <para>
+           This is a paragraph.
+          </para>
+          <para>
+           This is another paragraph.
+          </para>
+        </blockquote>
+      </example>
+    
+    </section>
+
+    <section xml:id="essentialcontentblocks-lists">
+    
+      <title>Lists (<tag>itemizedlist</tag>, <tag>orderedlist</tag>)</title>
+      
+      <para>
+        DocBook offers both bullet (unordered) lists with
+        <tag>itemizedlist</tag> and numbered (ordered) lists with
+        <tag>orderedlist</tag>. These lists are made up of <tag>listitem</tag>
+        elements that contain other content blocks -- as little as a paragraph. 
+      </para>
+      <example>
+        <title><tag>itemizedlist</tag> example</title>
         <programlisting><![CDATA[<itemizedlist>
   <listitem>
-    <para>First bullet in the list.</para>
+    <para>
+      First bullet in the list.
+    </para>
   </listitem>
   <listitem>
-    <para>Second bullet in the list.</para>
-  </listitem>
-  <listitem>
-    <para>Third bullet in the list.</para>
+    <para>
+      Second bullet in the list.
+    </para>
   </listitem>
 </itemizedlist>]]></programlisting>
-      </listitem>
-      <listitem>
-        <para>Asides in the form of <tag>note</tag>, <tag>tip</tag>, <tag>caution</tag>, <tag>warning</tag> or <tag>important</tag> stanzas, containing whatever content (as little as a single paragraph):</para>
-        <programlisting><![CDATA[<note>
-  <para>This is a note.</para>
-</note>]]></programlisting>
-        <para>It may be rendered like this:</para>
-        <note>
-          <para>This is a note.</para>
-        </note>
-      </listitem>
-      <listitem>
-        <para>Verbatim listings in the form of a <tag>programlisting</tag> stanza. To make your life easier with less-than, greater-than and ampersand characters that are present in source code fragments, you may want to escape the contents of the <tag>programlisting</tag> between <code>&lt;![CDATA[</code> and <code>]]&gt;</code>.</para>
-        <programlisting>&lt;programlisting&gt;&lt;![CDATA[#!/bin/sh
+        <blockquote>
+          <itemizedlist>
+            <listitem>
+              <para>
+                First bullet in the list.
+              </para>
+            </listitem>
+            <listitem>
+              <para>
+                Second bullet in the list.
+              </para>
+            </listitem>
+          </itemizedlist>
+        </blockquote>
+      </example>
+    
+    </section>
+    
+    <section xml:id="essentialcontentblocks-verbatimtext">
+    
+      <title>Verbatim text (<tag>programlisting</tag>,
+      <tag>literallayout</tag>)</title>
+      
+      <para>
+        Technical documentation often requires the presentation of verbatim
+        text, including the content of files or sequences of computer commands,
+        where whitespace and newlines matter. This is accomplished through two
+        related tags, <tag>programlisting</tag> and <tag>literallayout</tag>.
+        They differ only in that <tag>literallayout</tag> does not imply a
+        change of font whereas <tag>programlisting</tag> recommends a monospace
+        font rendition.
+      </para>
+      <example>
+        <title><tag>programlisting</tag> example</title>
+        <programlisting><![CDATA[<programlisting>#!/bin/sh
 echo "This is a shell script"
-exit 1]]&gt;&lt;/programlisting&gt;</programlisting>
-      </listitem>
-    </itemizedlist>
-    <para>There is also a rich markup vocabulary inline, the most important being:</para>
-    <itemizedlist>
-      <listitem>
-        <para><tag>code</tag> for <code>literals</code>: code fragments, variable names, commands, etc.</para>
-      </listitem>
-      <listitem>
-        <para><tag>emphasis</tag> for <emphasis>emphasis</emphasis>: important words, term definitions, etc.</para>
-      </listitem>
-      <listitem>
-        <para><tag>link</tag> for hyperlinks:</para>
-        <itemizedlist>
-          <listitem>
-            <para><code><![CDATA[<link xlink:href="http://docbook.org/">]]>DocBook<![CDATA[</link>]]></code> produces: <link xlink:href="http://docbook.org/">DocBook</link></para>
-          </listitem>
-          <listitem>
-            <para><code><![CDATA[<link xlink:href="http://docbook.org/" />]]></code> produces: <link xlink:href="http://docbook.org/" /></para>
-          </listitem>
-        </itemizedlist>
-      </listitem>
-    </itemizedlist>
+exit 1</programlisting>]]></programlisting>
+        <blockquote>
+          <programlisting>#!/bin/sh
+echo "This is a shell script"
+exit 1</programlisting>
+        </blockquote>
+      </example>
+      <caution>
+        <para>
+          The interpretation of inline markup is not suspended inside
+          <tag>programlisting</tag> and <tag>literallayout</tag> and the input
+          mechanism is still XML, so you either have to encode less-than,
+          greater-than and ampersand as <code>&amp;lt;</code>,
+          <code>&amp;gt;</code> and <code>&amp;amp;</code> respectively, or
+          escape all or part of the contents between <code>&lt;![CDATA[</code>
+          and <code>]]&gt;</code>.
+        </para>
+        <example>
+          <title><tag>programlisting</tag> example with CDATA section</title>
+          <programlisting>&lt;programlisting&gt;&lt;![CDATA[&lt;myxml&gt;
+  &lt;fragment&gt;This is an XML fragment&lt;/fragment&gt;
+&lt;/myxml&gt;]]&gt;&lt;/programlisting&gt;</programlisting>
+          <blockquote>
+            <programlisting><![CDATA[<myxml>
+  <fragment>This is an XML fragment</fragment>
+</myxml>]]></programlisting>
+          </blockquote>
+        </example>
+      </caution>
+      
+    </section>
+    
+    <section xml:id="essentialcontentblocks-asides">
+    
+      <title>Asides (<tag>caution</tag>, <tag>important</tag>, <tag>note</tag>,
+      <tag>tip</tag>, <tag>warning</tag>)</title>
+      
+      <para>
+        The five tags <tag>caution</tag>, <tag>important</tag>, <tag>note</tag>,
+        <tag>tip</tag> and <tag>warning</tag> delimit an aside to the reader
+        that is typically rendered offset from the main body of text and with a
+        little icon.
+      </para>
+      <example>
+        <title><tag>tip</tag> example</title>
+        <programlisting><![CDATA[<tip>
+  <para>
+    This is a sample tip.
+  </para>
+</tip>
+]]></programlisting>
+        <blockquote>
+          <tip>
+            <para>
+              This is a sample tip.
+            </para>
+          </tip>
+        </blockquote>
+      </example>
+    
+    </section>
 
   </section>
-  <!-- ESSENTIAL CONTENT BLOCKS -->
+  
+  <section xml:id="essentialinlinemarkup">
+  
+    <title>Essential Inline Markup</title>
 
-  <!-- ELEMENT REFERENCE -->
+    <para>
+      DocBook defines a rich variety of inline markup, which can result in a
+      visual effect when rendered.
+    </para>
+
+    <section xml:id="essentialinlinemarkup-fonteffects">
+    
+      <title>Font Effects (<tag>emphasis</tag>, <tag>subscript</tag>,
+      <tag>superscript</tag>)</title>
+      
+      <para>
+        DocBook describes the structure of text, not so much its look and feel,
+        so the <tag>emphasis</tag> tag is only guaranteed to result in some
+        emphasis, not necessarily in boldface or italics specifically. That
+        being said, most distributions display italics for a bare
+        <tag>emphasis</tag> tag, and the <tag class="attribute">role</tag>
+        attribute can be set to one of <tag class="attvalue">bold</tag> (or
+        <tag class="attvalue">strong</tag>),
+        <tag class="attvalue">underline</tag> or
+        <tag class="attvalue">strikethrough</tag> to exhibit the corresponding
+        font effect.
+      </para>
+      <example>
+        <title><tag>emphasis</tag> examples</title>
+        <programlisting><![CDATA[<para>
+  <emphasis>italics</emphasis>
+</para>
+<para>
+  <emphasis role="bold">bold</emphasis>, <emphasis role="strong">strong</emphasis>
+</para>
+<para>
+  <emphasis role="underline">underline</emphasis>
+</para>
+<para>
+  <emphasis role="strikethrough">strikethrough</emphasis>
+</para>]]></programlisting>
+        <blockquote>
+          <para>
+            <emphasis>italics</emphasis>
+          </para>
+          <para>
+            <emphasis role="bold">bold</emphasis>, <emphasis role="strong">strong</emphasis> 
+          </para>
+          <para>
+            <emphasis role="underline">underline</emphasis>
+          </para>
+          <para>
+            <emphasis role="strikethrough">strikethrough</emphasis>
+          </para>
+        </blockquote>
+      </example>
+      <para>
+        The <tag>subscript</tag> and <tag>superscript</tag> tags can be used to
+        display subscripts and superscripts.
+      </para>
+      <example>
+        <title><tag>subscript</tag> and <tag>superscript</tag> example</title>
+        <programlisting><![CDATA[<para>
+  Let y<subscript>0</subscript> = x<superscript>2</superscript>.
+</para>]]></programlisting>
+        <blockquote>
+          <para>
+            Let y<subscript>0</subscript> = x<superscript>2</superscript>.
+          </para>
+        </blockquote>
+      </example>
+    
+    </section>
+    
+  </section>
+
   <section xml:id="elementreference">
 
     <title>Element Reference</title>
@@ -242,9 +467,7 @@ exit 1]]&gt;&lt;/programlisting&gt;</programlisting>
     <para>The full DocBook element reference (fairly well organized) can be found here: <link xlink:href="http://docbook.org/tdg5/en/html/chunk-part-d64e8789.html" /></para>
 
   </section>
-  <!-- ELEMENT REFERENCE -->
 
-  <!-- APPENDIX: CHEAT SHEET -->
   <appendix>
 
     <title>Cheat Sheet</title>
@@ -283,6 +506,5 @@ MULTI-LINE:
 ]]></programlisting>
 
   </appendix>
-  <!-- APPENDIX: CHEAT SHEET -->
 
 </article>
