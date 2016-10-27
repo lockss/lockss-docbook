@@ -396,8 +396,7 @@ exit 1</programlisting>
 
     <section xml:id="essentialinlinemarkup-fonteffects">
     
-      <title>Font Effects (<tag>emphasis</tag>, <tag>subscript</tag>,
-      <tag>superscript</tag>)</title>
+      <title>Font Effects (<tag>emphasis</tag>)</title>
       
       <para>
         DocBook describes the structure of text, not so much its look and feel,
@@ -417,7 +416,8 @@ exit 1</programlisting>
   <emphasis>italics</emphasis>
 </para>
 <para>
-  <emphasis role="bold">bold</emphasis>, <emphasis role="strong">strong</emphasis>
+  <emphasis role="bold">bold</emphasis>,
+  <emphasis role="strong">strong</emphasis>
 </para>
 <para>
   <emphasis role="underline">underline</emphasis>
@@ -430,7 +430,8 @@ exit 1</programlisting>
             <emphasis>italics</emphasis>
           </para>
           <para>
-            <emphasis role="bold">bold</emphasis>, <emphasis role="strong">strong</emphasis> 
+            <emphasis role="bold">bold</emphasis>,
+            <emphasis role="strong">strong</emphasis> 
           </para>
           <para>
             <emphasis role="underline">underline</emphasis>
@@ -440,6 +441,14 @@ exit 1</programlisting>
           </para>
         </blockquote>
       </example>
+      
+    </section>
+    
+    <section xml:id="essentialinlinemarkup-subscriptsandsuperscripts">
+    
+      <title>Subscripts and Superscripts (<tag>subscript</tag>,
+      <tag>superscript</tag>)</title>
+    
       <para>
         The <tag>subscript</tag> and <tag>superscript</tag> tags can be used to
         display subscripts and superscripts.
