@@ -52,9 +52,10 @@ PdfDoc()
 {
   XML="$1"
   PDF=`dirname "${XML}"`/`basename "${XML}" .xml`.pdf
-  FOP_PARAMS="-param admon.graphics 1 -param admon.graphics.path ${DOCBOOKXSL_HOME}/images/ -param admon.graphics.extension .svg"
+#  FOP_PARAMS="-param admon.graphics 1 -param admon.graphics.path ${DOCBOOKXSL_HOME}/images/ -param admon.graphics.extension .svg"
+  FOP_PARAMS="-param admon.graphics.path ${DOCBOOKXSL_HOME}/images/colorsvg/"
   if [ ! -f "${PDF}" -o "${XML}" -nt "${PDF}" ]; then
-    "${FOP}" $FOP_PARAMS -xml "${XML}" -xsl "${DOCBOOKXSL_FO}" -pdf "${PDF}"
+    FOP_OPTS='-Djava.awt.headless=true' "${FOP}" $FOP_PARAMS -xml "${XML}" -xsl "${DOCBOOKXSL_FO}" -pdf "${PDF}"
   fi
 }
 
@@ -122,7 +123,7 @@ if [ "${MODE}" = "pdf" ]; then
   #
   # DOCBOOKXSL_FO
   #
-  DOCBOOKXSL_FO="${DOCBOOKXSL_HOME}/fo/docbook.xsl"
+  DOCBOOKXSL_FO="${MY_HOME}/xsl/lockss-docbook.xsl"
   if [ ! -f "${DOCBOOKXSL_FO}" ]; then
     Error "DOCBOOKXSL_FO: ${DOCBOOKXSL_FO} not found"
   fi

@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 
+
+Copyright (c) 2000-2016, Board of Trustees of Leland Stanford Jr. University
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without modification,
+are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice, this
+list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+this list of conditions and the following disclaimer in the documentation and/or
+other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+may be used to endorse or promote products derived from this software without
+specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE FOR
+ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON
+ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+-->
+
+<xsl:stylesheet version="1.0"
+                xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+                xmlns:d="http://docbook.org/ns/docbook"
+                xmlns:fo="http://www.w3.org/1999/XSL/Format">
+
+  <!-- 
+        Start with fo/docbook.xsl as a base
+  -->
+  <xsl:import href="../lib/docbook-xsl-ns/fo/docbook.xsl" />
+
+  <!-- 
+        Turn section numbering on
+  -->
+  <xsl:param name="section.autolabel" select="1" />
+
+  <!-- 
+        Turn program listing line numbering on
+  -->
+<!--  DOESN'T WORK
+  <xsl:param name="use.extensions" select="1" />
+  <xsl:param name="linenumbering.extension" select="1" />
+-->
+
+  <!--
+        Enable pretty admonition graphics
+  -->
+  <xsl:param name="admon.graphics" select="1" />
+  <!--  couldn't figure out what path to supply, passing via makedoc -->
+  <!-- <xsl:param name="admon.graphics.path" select="'../lib/docbook-xsl-ns/images/colorsvg/'" /> -->
+  <xsl:param name="admon.graphics.extension" select="'.svg'" />
+
+  <!-- 
+        <emphasis>: add role="italic" and make default role bold instead of italic
+        Original at fo/inline.xsl lines 733-766
+  -->
+  <xsl:template match="d:emphasis">
+    <xsl:choose>
+      <xsl:when test="@role='italic'">
+        <xsl:call-template name="inline.italicseq"/>
+      </xsl:when>
+      <xsl:when test="@role='bold' or @role='strong'">
+        <xsl:call-template name="inline.boldseq"/>
+      </xsl:when>
+      <xsl:when test="@role='underline'">
+        <fo:inline text-decoration="underline">
+          <xsl:call-template name="inline.charseq"/>
+        </fo:inline>
+      </xsl:when>
+      <xsl:when test="@role='strikethrough'">
+        <fo:inline text-decoration="line-through">
+          <xsl:call-template name="inline.charseq"/>
+        </fo:inline>
+      </xsl:when>
+      <xsl:otherwise>
+        <!-- How many regular emphasis ancestors does this element have -->
+        <xsl:variable name="depth" select="count(ancestor::d:emphasis
+  	[not(contains(' bold strong underline strikethrough ', concat(' ', @role, ' ')))]
+  	)"/>
+  
+        <xsl:choose>
+          <xsl:when test="$depth mod 2 = 1">
+            <fo:inline font-style="normal">
+              <xsl:apply-templates/>
+            </fo:inline>
+          </xsl:when>
+          <xsl:otherwise>
+            <xsl:call-template name="inline.boldseq"/>
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+  
+  <!-- 
+        <tag>: make default class "starttag" instead of "element"
+        Original: fo/inline.xsl lines 980-1085
+  -->
+  <xsl:template match="d:sgmltag|d:tag">
+    <xsl:variable name="class">
+      <xsl:choose>
+        <xsl:when test="@class">
+          <xsl:value-of select="@class"/>
+        </xsl:when>
+        <xsl:otherwise>starttag</xsl:otherwise>
+      </xsl:choose>
+    </xsl:variable>
+  
+    <xsl:choose>
+      <xsl:when test="$class='attribute'">
+        <xsl:call-template name="inline.monoseq"/>
+      </xsl:when>
+      <xsl:when test="$class='attvalue'">
+        <xsl:call-template name="inline.monoseq"/>
+      </xsl:when>
+      <xsl:when test="$class='element'">
+        <xsl:call-template name="inline.monoseq"/>
+      </xsl:when>
+      <xsl:when test="$class='endtag'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&lt;/</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>&gt;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='genentity'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&amp;</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='numcharref'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&amp;#</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='paramentity'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>%</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='pi'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&lt;?</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>&gt;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='xmlpi'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&lt;?</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>?&gt;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='starttag'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&lt;</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>&gt;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='emptytag'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&lt;</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>/&gt;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:when test="$class='sgmlcomment' or $class='comment'">
+        <xsl:call-template name="inline.monoseq">
+          <xsl:with-param name="content">
+            <xsl:text>&lt;!--</xsl:text>
+            <xsl:apply-templates/>
+            <xsl:text>--&gt;</xsl:text>
+          </xsl:with-param>
+        </xsl:call-template>
+      </xsl:when>
+      <xsl:otherwise>
+        <xsl:call-template name="inline.charseq"/>
+      </xsl:otherwise>
+    </xsl:choose>
+  </xsl:template>
+ 
+</xsl:stylesheet>

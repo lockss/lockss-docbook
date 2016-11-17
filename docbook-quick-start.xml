@@ -4,7 +4,7 @@
 
   <info>
     <title>DocBook Quick Start</title>
-    <subtitle>Getting Up and Running with DocBook</subtitle>
+    <subtitle>Up and Running with DocBook</subtitle>
     <authorgroup>
       <author>
         <orgname>LOCKSS Program, Stanford University Libraries</orgname>
@@ -134,8 +134,8 @@
             An author group with the <tag>authorgroup</tag> element, containing
             one or more <tag>author</tag> elements. At the simplest level, an
             <tag>author</tag> element contains either the name of an
-            organizational author with the <tag>orgname</tag> element or the name
-            of an individual author with the <tag>person</tag> element.
+            organizational author with the <tag>orgname</tag> element or the
+            name of an individual author with the <tag>personname</tag> element.
           </para>
         </listitem>
       </itemizedlist>
@@ -332,11 +332,17 @@ exit 1</programlisting>
         <para>
           The interpretation of inline markup is not suspended inside
           <tag>programlisting</tag> and <tag>literallayout</tag> and the input
-          mechanism is still XML, so you either have to encode less-than,
-          greater-than and ampersand as <code>&amp;lt;</code>,
-          <code>&amp;gt;</code> and <code>&amp;amp;</code> respectively, or
-          escape all or part of the contents between <code>&lt;![CDATA[</code>
-          and <code>]]&gt;</code>.
+          mechanism is still XML, so you have to encode less-than, greater-than
+          and ampersand as <code>&amp;lt;</code>, <code>&amp;gt;</code> and
+          <code>&amp;amp;</code> respectively.
+        </para>
+      </caution>
+      <tip>
+        <para>
+          This will quickly become tedious if the verbatim text is XML or if you
+          need to be able to copy and paste sections of verbatim text. You can
+          escape all or part of the contents with <code>&lt;![CDATA[</code> and
+          <code>]]&gt;</code>.
         </para>
         <example>
           <title><tag>programlisting</tag> example with CDATA section</title>
@@ -349,7 +355,7 @@ exit 1</programlisting>
 </myxml>]]></programlisting>
           </blockquote>
         </example>
-      </caution>
+      </tip>          
       
     </section>
     
@@ -365,19 +371,19 @@ exit 1</programlisting>
         little icon.
       </para>
       <example>
-        <title><tag>tip</tag> example</title>
-        <programlisting><![CDATA[<tip>
+        <title><tag>important</tag> example</title>
+        <programlisting><![CDATA[<important>
   <para>
-    This is a sample tip.
+    This is important!
   </para>
-</tip>
+</important>
 ]]></programlisting>
         <blockquote>
-          <tip>
+          <important>
             <para>
-              This is a sample tip.
+              This is important!
             </para>
-          </tip>
+          </important>
         </blockquote>
       </example>
     
@@ -401,23 +407,32 @@ exit 1</programlisting>
       <para>
         DocBook describes the structure of text, not so much its look and feel,
         so the <tag>emphasis</tag> tag is only guaranteed to result in some
-        emphasis, not necessarily in boldface or italics specifically. That
-        being said, most distributions display italics for a bare
-        <tag>emphasis</tag> tag, and the <tag class="attribute">role</tag>
-        attribute can be set to one of <tag class="attvalue">bold</tag> (or
+        emphasis, not necessarily boldface or italics specifically. Most
+        implementations show emphasis with italics by default, and the
+        <tag class="attribute">role</tag> attribute can be set to one of
+        <tag class="attvalue">bold</tag> (or
         <tag class="attvalue">strong</tag>),
         <tag class="attvalue">underline</tag> or
         <tag class="attvalue">strikethrough</tag> to exhibit the corresponding
         font effect.
       </para>
+      <para>
+        That said, the <package>lockss-docbook</package> package chooses to
+        implement emphasis with boldface by default, and implements an extension
+        whereby the <tag class="attribute">role</tag> attribute can be set to
+        <tag class="attvalue">italic</tag>.
+      </para>
       <example>
         <title><tag>emphasis</tag> examples</title>
-        <programlisting><![CDATA[<para>
-  <emphasis>italics</emphasis>
+        <programlisting linenumbering="numbered"><![CDATA[<para>
+  <emphasis>default</emphasis> (lockss-docbook customization)
 </para>
 <para>
   <emphasis role="bold">bold</emphasis>,
   <emphasis role="strong">strong</emphasis>
+</para>
+<para>
+  <emphasis role="italic">italic</emphasis> (lockss-docbook extension)
 </para>
 <para>
   <emphasis role="underline">underline</emphasis>
@@ -427,11 +442,14 @@ exit 1</programlisting>
 </para>]]></programlisting>
         <blockquote>
           <para>
-            <emphasis>italics</emphasis>
+            <emphasis>default</emphasis> (lockss-docbook customization)
           </para>
           <para>
             <emphasis role="bold">bold</emphasis>,
-            <emphasis role="strong">strong</emphasis> 
+            <emphasis role="strong">strong</emphasis>
+          </para>
+          <para>
+            <emphasis role="italic">italic</emphasis> (lockss-docbook extension)
           </para>
           <para>
             <emphasis role="underline">underline</emphasis>
