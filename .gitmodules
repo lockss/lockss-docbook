@@ -1,6 +1,0 @@
-[submodule "submodules/docbook-docbook"]
-	path = submodules/docbook-docbook
-	url = https://github.com/docbook/docbook
-[submodule "submodules/docbook-xslt10-stylesheets"]
-	path = submodules/docbook-xslt10-stylesheets
-	url = https://github.com/docbook/xslt10-stylesheets
