@@ -63,6 +63,33 @@
 
     <title>Document Structure</title>
 
+    <para>
+      This section presents the basic structure of a DocBook document:
+    </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          A preamble
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          A top-level element
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          The top-level element's <tag>info</tag> section (title, optional
+          subtitle, author information)
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Sections
+        </para>
+      </listitem>
+    </itemizedlist>
+
     <section xml:id="documentstructure-preamble">
     
       <title>Preamble</title>
@@ -140,7 +167,7 @@
         </listitem>
       </itemizedlist>
       <example>
-        <title><tag>authorgroup</tag> example</title>
+        <title><tag>info</tag> and <tag>authorgroup</tag> example</title>
         <programlisting><![CDATA[<info>
     <title>Main Title</title>
     <subtitle>The Subtitle Goes Here</subtitle>
@@ -205,7 +232,7 @@
 
     <para>
       Each section is then made up of content blocks like paragraphs, lists,
-      verbatim text, asides, etc.. DocBook provides a rich vocabulary of content
+      verbatim text, asides, etc. DocBook provides a rich vocabulary of content
       structures. The most immediately useful ones are presented in this
       section:
     </para>
@@ -397,8 +424,26 @@ exit 1</programlisting>
 
     <para>
       DocBook defines a rich variety of inline markup, which can result in a
-      visual effect when rendered.
+      visual effect when rendered. The most immediately useful ones are
+      introduced in this section:
     </para>
+    <itemizedlist>
+      <listitem>
+        <para>
+          Bold, italics, underline, strikethrough
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Monospace
+        </para>
+      </listitem>
+      <listitem>
+        <para>
+          Subscript and superscript
+        </para>
+      </listitem>
+    </itemizedlist>
 
     <section xml:id="essentialinlinemarkup-fonteffects">
     
@@ -424,7 +469,7 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>emphasis</tag> examples</title>
-        <programlisting linenumbering="numbered"><![CDATA[<para>
+        <programlisting><![CDATA[<para>
   <emphasis>default</emphasis> (lockss-docbook customization)
 </para>
 <para>
@@ -462,6 +507,45 @@ exit 1</programlisting>
       
     </section>
     
+    <section xml:id="essentialinlinemarkup-monospace">
+    
+      <title>Monospace (<tag>code</tag>, <tag>tag</tag>)</title>
+    
+      <para>
+        DocBook offers rich markup constructs for technical documentation. The
+        most important construct is the <tag>code</tag> tag, which causes text
+        to be styled in a monospace font.
+      </para>
+      <example>
+        <title><tag>code</tag> example</title>
+        <programlisting><![CDATA[<para>
+  Type <code>exit</code> to quit.
+</para>]]></programlisting>
+        <blockquote>
+          <para>
+            Type <code>exit</code> to quit.
+          </para>
+        </blockquote>
+      </example>
+      <para>
+        There are numerous other constructs for computer-related markup, but one
+        that can be singled out for being particularly useful is the
+        <tag>tag</tag> tag, which is to style the name of XML tags.
+      </para>
+      <note>
+        <para>
+          Standard DocBook implementations simply style the text of the
+          <tag>tag</tag> tag in monospace by default, so
+          <code><![CDATA[<tag>foo</tag>]]></code> results in <code>foo</code>,
+          but the <package>lockss-docbook</package> package adds the opening and
+          closing angle brackets so it renders as <tag>foo</tag>. Normally this
+          would require the more specific
+          <code><![CDATA[<tag class="starttag">foo</tag>]]></code>.
+        </para>
+      </note>
+    
+    </section>
+    
     <section xml:id="essentialinlinemarkup-subscriptsandsuperscripts">
     
       <title>Subscripts and Superscripts (<tag>subscript</tag>,
@@ -485,6 +569,38 @@ exit 1</programlisting>
     
     </section>
     
+  </section>
+
+  <section xml:id="cookbook">
+
+    <title>Cookbook</title>
+
+    <section xml:id="cookbook-userinput">
+    
+      <title>User Input (<tag>userinput</tag>, <tag>replaceable</tag>)</title>
+      
+      <para>
+        Instead of generic <tag>code</tag> tags, you can use
+        <tag>userinput</tag> to represent commands or data entered by the user,
+        and <tag>replaceable</tag> to represent portions that are meant as
+        placeholders the user needs to replace with the desired text.
+      </para>
+      <example>
+        <title><tag>userinput</tag> and <tag>replaceable</tag> example</title>
+        <programlisting><![CDATA[<para>
+  Type <userinput>touch <replaceable>MYFILE</replaceable></userinput>,
+  where <replaceable>MYFILE</replaceable> is the file name from step 2.
+</para>]]></programlisting>
+        <blockquote>
+          <para>
+            Type <userinput>touch <replaceable>MYFILE</replaceable></userinput>,
+            where <replaceable>MYFILE</replaceable> is the file name from step 2.
+          </para>
+        </blockquote>
+      </example>
+   
+    </section>
+
   </section>
 
   <section xml:id="elementreference">

@@ -47,14 +47,6 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
   <xsl:param name="section.autolabel" select="1" />
 
-  <!-- 
-        Turn program listing line numbering on
-  -->
-<!--  DOESN'T WORK
-  <xsl:param name="use.extensions" select="1" />
-  <xsl:param name="linenumbering.extension" select="1" />
--->
-
   <!--
         Enable pretty admonition graphics
   -->
