@@ -601,17 +601,120 @@ exit 1</programlisting>
    
     </section>
 
+    <section xml:id="cookbook-applicationoutput">
+    
+      <title>Application Output (<tag>computeroutput</tag>, <tag>screen</tag>)</title>
+      
+      <para>
+        Instead of generic <tag>code</tag> tags, you can use
+        <tag>computeroutput</tag> to represent data or messages output by
+        applications.
+      </para>
+      <example>
+        <title><tag>computeroutput</tag> example</title>
+        <programlisting><![CDATA[<para>
+  An error is displayed: <computeroutput>No such file or
+  directory</computeroutput>.
+</para>]]></programlisting>
+        <blockquote>
+          <para>
+            An error is displayed: <computeroutput>No such file or
+            directory</computeroutput>.
+          </para>
+        </blockquote>
+      </example>
+      <para>
+        The <tag>screen</tag> block can be used to represent multiple lines of
+        output conveniently, or to represent what the console might look like
+        to a user.
+      </para>
+      <example>
+        <title><tag>screen</tag> example</title>
+        <programlisting><![CDATA[<para>
+  The output of <userinput>ls -l</userinput> is:
+</para>
+<screen>
+total 8
+dr-xr-xr-x 2 root ftp  4096 Sep 30  2015 ftp
+drwxr-xr-x 2 root root 4096 Sep 30  2015 http
+</screen>
+]]></programlisting>
+        <blockquote>
+          <para>
+            The output of <userinput>ls -l</userinput> is:
+          </para>
+          <screen>
+total 8
+dr-xr-xr-x 2 root ftp  4096 Sep 30  2015 ftp
+drwxr-xr-x 2 root root 4096 Sep 30  2015 http
+          </screen>
+        </blockquote>
+      </example>
+   
+    </section>
+
+    <section xml:id="cookbook-consoletranscript">
+    
+      <title>Console Transcript</title>
+      
+      <para>
+        Instead of a generic <tag>programlisting</tag> or <tag>screen</tag>
+        block, you can make a console transcript richer by alternating
+        <tag>userinput</tag> and <tag>prompt</tag>/<tag>computeroutput</tag>
+        lines inside a <tag>literallayout</tag> block.
+      </para>
+      <example>
+        <title>Console transcript example</title>
+        <programlisting><![CDATA[<prompt>$ </prompt><userinput>cd /log</userinput>
+<computeroutput>bash: cd: /log: No such file or directory</computeroutput>
+<prompt>$ </prompt><userinput>cd /var</userinput>
+<prompt>$ </prompt><userinput>ls</userinput>
+<computeroutput>lock  log  mail  run  spool  tmp</computeroutput>]]></programlisting>
+        <blockquote>
+          <literallayout>
+<prompt>$ </prompt><userinput>cd /log</userinput>
+<computeroutput>bash: cd: /log: No such file or directory</computeroutput>
+<prompt>$ </prompt><userinput>cd /var</userinput>
+<prompt>$ </prompt><userinput>ls</userinput>
+<computeroutput>lock  log  mail  run  spool  tmp</computeroutput>
+          </literallayout>
+        </blockquote>
+      </example>
+   
+    </section>
+
+    <section xml:id="cookbook-documentingcommands">
+    
+      <title>Documenting Commands</title>
+      
+      <para>
+        In addition to <tag>userinput</tag> and <tag>replaceable</tag> tags,
+        DocBook offers constructs to document and format the syntax of commands.  
+      </para>
+      <para>
+        The <tag>command</tag> tag can be used to refer to a Unix command by
+        name. For example, <code><![CDATA[<command>pwd</command>]]></code>
+        is rendered as <command>pwd</command>.
+      </para>
+      <para>
+        The <tag>option</tag> tag can be used to refer to an option in a command
+        synopsis. For example, <code><![CDATA[<option>-s</option>]]></code> is
+        rendered as <option>-s</option>.
+      </para>
+
+    </section>
+
   </section>
 
-  <section xml:id="elementreference">
+  <appendix xml:id="elementreference">
 
     <title>Element Reference</title>
 
     <para>The full DocBook element reference (fairly well organized) can be found here: <link xlink:href="http://docbook.org/tdg5/en/html/chunk-part-d64e8789.html" /></para>
 
-  </section>
+  </appendix>
 
-  <appendix>
+  <appendix xml:id="cheatsheet">
 
     <title>Cheat Sheet</title>
 
