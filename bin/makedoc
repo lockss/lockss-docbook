@@ -52,7 +52,6 @@ PdfDoc()
 {
   XML="$1"
   PDF=`dirname "${XML}"`/`basename "${XML}" .xml`.pdf
-#  FOP_PARAMS="-param admon.graphics 1 -param admon.graphics.path ${DOCBOOKXSL_HOME}/images/ -param admon.graphics.extension .svg"
   FOP_PARAMS="-param admon.graphics.path ${DOCBOOKXSL_HOME}/images/colorsvg/"
   if [ ! -f "${PDF}" -o "${XML}" -nt "${PDF}" ]; then
     FOP_OPTS='-Djava.awt.headless=true -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog -Dorg.apache.commons.logging.simplelog.defaultlog=WARN' "${FOP}" $FOP_PARAMS -xml "${XML}" -xsl "${DOCBOOKXSL_FO}" -pdf "${PDF}"
