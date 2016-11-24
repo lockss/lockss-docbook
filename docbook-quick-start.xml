@@ -132,10 +132,12 @@
         Whichever top-level element you choose (say <tag>article</tag>), declare
         the following namespaces:
       </para>
-      <programlisting><![CDATA[<article xmlns="http://docbook.org/ns/docbook" version="5.0"
+      <programlisting><![CDATA[
+<article xmlns="http://docbook.org/ns/docbook" version="5.0"
          xmlns:xlink="http://www.w3.org/1999/xlink">
   ...
-</article>]]></programlisting>
+</article>
+]]></programlisting>
       <para>
         The top-level tags <tag>set</tag>, <tag>book</tag>, <tag>part</tag>,
         <tag>chapter</tag> and <tag>article</tag> each begin with an
@@ -168,18 +170,20 @@
       </itemizedlist>
       <example>
         <title><tag>info</tag> and <tag>authorgroup</tag> example</title>
-        <programlisting><![CDATA[<info>
-    <title>Main Title</title>
-    <subtitle>The Subtitle Goes Here</subtitle>
-    <authorgroup>
-      <author>
-        <personname>John H. Smith</personname>
-      </author>
-      <author>
-        <orgname>The MegaDocBook Foundation</orgname>
-      </author>
-    </authorgroup>
-  </info>]]></programlisting>
+        <programlisting><![CDATA[
+<info>
+  <title>Main Title</title>
+  <subtitle>The Subtitle Goes Here</subtitle>
+  <authorgroup>
+    <author>
+      <personname>John H. Smith</personname>
+    </author>
+    <author>
+      <orgname>The MegaDocBook Foundation</orgname>
+    </author>
+  </authorgroup>
+</info>
+]]></programlisting>
       </example>
       
     </section>
@@ -196,22 +200,24 @@
       </para>
       <example>
         <title><tag>section</tag> example</title>
-        <programlisting><![CDATA[<section>
-    <title>First Section</title>
+        <programlisting><![CDATA[
+<section>
+  <title>First Section</title>
+  ...
+  <section>
+    <title>First Subsection</title>
     ...
-    <section>
-      <title>First Subsection</title>
-      ...
-    </section>
-    <section>
-      <title>Second Subsection</title>
-      ...
-    </section>
   </section>
   <section>
-    <title>Second Section</title>
+    <title>Second Subsection</title>
     ...
-  </section>]]></programlisting>
+  </section>
+</section>
+<section>
+  <title>Second Section</title>
+  ...
+</section>
+]]></programlisting>
       </example>
       <tip>
         <para>
@@ -270,18 +276,20 @@
       </para>
       <example>
         <title><tag>para</tag> example</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   This is a paragraph.
 </para>
 <para>
   This is another paragraph.
-</para>]]></programlisting>
+</para>
+]]></programlisting>
         <blockquote>
           <para>
-           This is a paragraph.
+            This is a paragraph.
           </para>
           <para>
-           This is another paragraph.
+            This is another paragraph.
           </para>
         </blockquote>
       </example>
@@ -300,7 +308,8 @@
       </para>
       <example>
         <title><tag>itemizedlist</tag> example</title>
-        <programlisting><![CDATA[<itemizedlist>
+        <programlisting><![CDATA[
+<itemizedlist>
   <listitem>
     <para>
       First bullet in the list.
@@ -311,7 +320,8 @@
       Second bullet in the list.
     </para>
   </listitem>
-</itemizedlist>]]></programlisting>
+</itemizedlist>
+]]></programlisting>
         <blockquote>
           <itemizedlist>
             <listitem>
@@ -346,15 +356,24 @@
       </para>
       <example>
         <title><tag>programlisting</tag> example</title>
-        <programlisting><![CDATA[<programlisting>#!/bin/sh
+        <programlisting><![CDATA[
+<programlisting>#!/bin/sh
 echo "This is a shell script"
-exit 1</programlisting>]]></programlisting>
+exit 1</programlisting>
+]]></programlisting>
         <blockquote>
           <programlisting>#!/bin/sh
 echo "This is a shell script"
 exit 1</programlisting>
         </blockquote>
       </example>
+      <para>
+        Note the placement of newlines in the example above. Adding newlines
+        after <tag class="starttag">programlisting</tag> and before
+        <tag class="endtag">programlisting</tag> is perfectly valid and is
+        probably more legible in DocBook source, but may result in additional
+        blank lines when rendered.
+      </para>
       <caution>
         <para>
           The interpretation of inline markup is not suspended inside
@@ -399,7 +418,8 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>important</tag> example</title>
-        <programlisting><![CDATA[<important>
+        <programlisting><![CDATA[
+<important>
   <para>
     This is important!
   </para>
@@ -469,7 +489,8 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>emphasis</tag> examples</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   <emphasis>default</emphasis> (lockss-docbook customization)
 </para>
 <para>
@@ -484,7 +505,8 @@ exit 1</programlisting>
 </para>
 <para>
   <emphasis role="strikethrough">strikethrough</emphasis>
-</para>]]></programlisting>
+</para>
+]]></programlisting>
         <blockquote>
           <para>
             <emphasis>default</emphasis> (lockss-docbook customization)
@@ -518,9 +540,11 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>code</tag> example</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   Type <code>exit</code> to quit.
-</para>]]></programlisting>
+</para>
+]]></programlisting>
         <blockquote>
           <para>
             Type <code>exit</code> to quit.
@@ -557,9 +581,11 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>subscript</tag> and <tag>superscript</tag> example</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   Let y<subscript>0</subscript> = x<superscript>2</superscript>.
-</para>]]></programlisting>
+</para>
+]]></programlisting>
         <blockquote>
           <para>
             Let y<subscript>0</subscript> = x<superscript>2</superscript>.
@@ -575,9 +601,15 @@ exit 1</programlisting>
 
     <title>Cookbook</title>
 
+    <para>
+      The basic constructs presented above are more than enough to write
+      professional-looking technical documentation of all kinds. This section
+      introduces constructs and techniques for even richer presentation.
+    </para>
+
     <section xml:id="cookbook-userinput">
     
-      <title>User Input (<tag>userinput</tag>, <tag>replaceable</tag>)</title>
+      <title>User Input</title>
       
       <para>
         Instead of generic <tag>code</tag> tags, you can use
@@ -587,10 +619,12 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>userinput</tag> and <tag>replaceable</tag> example</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   Type <userinput>touch <replaceable>MYFILE</replaceable></userinput>,
   where <replaceable>MYFILE</replaceable> is the file name from step 2.
-</para>]]></programlisting>
+</para>
+]]></programlisting>
         <blockquote>
           <para>
             Type <userinput>touch <replaceable>MYFILE</replaceable></userinput>,
@@ -603,7 +637,7 @@ exit 1</programlisting>
 
     <section xml:id="cookbook-applicationoutput">
     
-      <title>Application Output (<tag>computeroutput</tag>, <tag>screen</tag>)</title>
+      <title>Application Output</title>
       
       <para>
         Instead of generic <tag>code</tag> tags, you can use
@@ -612,10 +646,12 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>computeroutput</tag> example</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   An error is displayed: <computeroutput>No such file or
   directory</computeroutput>.
-</para>]]></programlisting>
+</para>
+]]></programlisting>
         <blockquote>
           <para>
             An error is displayed: <computeroutput>No such file or
@@ -630,7 +666,8 @@ exit 1</programlisting>
       </para>
       <example>
         <title><tag>screen</tag> example</title>
-        <programlisting><![CDATA[<para>
+        <programlisting><![CDATA[
+<para>
   The output of <userinput>ls -l</userinput> is:
 </para>
 <screen>
@@ -658,26 +695,30 @@ drwxr-xr-x 2 root root 4096 Sep 30  2015 http
       <title>Console Transcript</title>
       
       <para>
-        Instead of a generic <tag>programlisting</tag> or <tag>screen</tag>
-        block, you can make a console transcript richer by alternating
-        <tag>userinput</tag> and <tag>prompt</tag>/<tag>computeroutput</tag>
-        lines inside a <tag>literallayout</tag> block.
+        A console transcript can be represented by simply copying and pasting
+        the contents into a <tag>programlisting</tag> or <tag>screen</tag>
+        block, but surrounding the user input lines with <tag>userinput</tag>
+        creates a richer result. 
       </para>
       <example>
         <title>Console transcript example</title>
-        <programlisting><![CDATA[<prompt>$ </prompt><userinput>cd /log</userinput>
-<computeroutput>bash: cd: /log: No such file or directory</computeroutput>
-<prompt>$ </prompt><userinput>cd /var</userinput>
-<prompt>$ </prompt><userinput>ls</userinput>
-<computeroutput>lock  log  mail  run  spool  tmp</computeroutput>]]></programlisting>
+        <programlisting><![CDATA[
+<programlisting>
+$ <userinput>cd /log</userinput>
+bash: cd: /log: No such file or directory
+$ <userinput>cd /var</userinput>
+$ <userinput>ls</userinput>
+lock  log  mail  run  spool  tmp
+</programlisting>
+]]></programlisting>
         <blockquote>
-          <literallayout>
-<prompt>$ </prompt><userinput>cd /log</userinput>
-<computeroutput>bash: cd: /log: No such file or directory</computeroutput>
-<prompt>$ </prompt><userinput>cd /var</userinput>
-<prompt>$ </prompt><userinput>ls</userinput>
-<computeroutput>lock  log  mail  run  spool  tmp</computeroutput>
-          </literallayout>
+          <programlisting>
+$ <userinput>cd /log</userinput>
+bash: cd: /log: No such file or directory
+$ <userinput>cd /var</userinput>
+$ <userinput>ls</userinput>
+lock  log  mail  run  spool  tmp
+          </programlisting>
         </blockquote>
       </example>
    
@@ -688,19 +729,236 @@ drwxr-xr-x 2 root root 4096 Sep 30  2015 http
       <title>Documenting Commands</title>
       
       <para>
-        In addition to <tag>userinput</tag> and <tag>replaceable</tag> tags,
-        DocBook offers constructs to document and format the syntax of commands.  
+        DocBook offers many constructs to document the syntax of commands,
+        scripts or programs, in manners similar to what might be seen in
+        <command>man</command> pages or the <option>--help</option> message of
+        tools.
       </para>
       <para>
-        The <tag>command</tag> tag can be used to refer to a Unix command by
-        name. For example, <code><![CDATA[<command>pwd</command>]]></code>
-        is rendered as <command>pwd</command>.
+        The grouping construct for a command synopsis is <tag>cmdsynopsis</tag>.
+        It then contains a <tag>command</tag> tag for the name of the command,
+        script or program, and zero or more <tag>arg</tag> tags for arguments
+        and options, which can be grouped in nestable <tag>group</tag> tags.
+        (Here "group" means "alternatives".)
       </para>
       <para>
-        The <tag>option</tag> tag can be used to refer to an option in a command
-        synopsis. For example, <code><![CDATA[<option>-s</option>]]></code> is
-        rendered as <option>-s</option>.
+        For simplicity's sake, the contents of the <tag>arg</tag> tag can simply
+        be text, but the intent is for semantic markup, which can include the
+        <tag>option</tag> tag for an option, the <tag>replaceable</tag> tag
+        for a placeholder whose value is supplied by the user, or nested
+        <tag>arg</tag> tags.
       </para>
+      <para>
+        The <tag>option</tag> tag does not explicitly cause the decoration of
+        the option text because depending on the context it could be a single
+        hyphen, a double hyphen, or a forward slash, or even other leading
+        characters like a plus sign, so including these characters is up to the
+        author.
+      </para>
+      <para>
+        The <tag>arg</tag> and <tag>group</tag> tags have two optional
+        attributes:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            The <tag class="attribute">choice</tag> attribute: either
+            <tag class="attvalue">opt</tag> for an optional item (the default)
+            decorated with curly braces, or <tag class="attvalue">req</tag> for
+            a required item decorated with square brackets, or
+            <tag class="attvalue">plain</tag> for an unadorned required item.
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            The <tag class="attribute">rep</tag> attribute: either
+            <tag class="attvalue">norepeat</tag> for a non-repeating item (the
+            default) or <tag class="attvalue">repeat</tag> for a repeating item
+            decorated with an ellipsis
+         </para>
+        </listitem>
+      </itemizedlist>
+      <tip>
+        <para>
+          Specifying an explicit <tag class="attribute">choice</tag> attribute
+          on every <tag>arg</tag> and <tag>group</tag> tag is recommended.
+        </para>
+      </tip>
+      <para>
+        Also worth mentioning is the <tag class="emptytag">sbr</tag> empty tag,
+        one of DocBook's rare explicit line breaks, which can occur in a
+        <tag>cmdsynopsis</tag> block.
+      </para>
+      <example>
+        <title><tag>cmdsynopsis</tag> with arguments</title>
+        <programlisting><![CDATA[
+<cmdsynopsis>
+  <command>foo</command>
+  <arg choice="plain"><replaceable>infile</replaceable></arg>
+  <arg choice="plain"><replaceable>outfile</replaceable></arg>
+  <arg choice="opt" rep="repeat"><replaceable>stylefile</replaceable></arg>
+</cmdsynopsis>
+]]></programlisting>
+        <blockquote>
+          <cmdsynopsis>
+            <command>foo</command>
+            <arg choice="plain"><replaceable>infile</replaceable></arg>
+            <arg choice="plain"><replaceable>outfile</replaceable></arg>
+            <arg choice="opt" rep="repeat"><replaceable>stylefile</replaceable></arg>
+          </cmdsynopsis>
+        </blockquote>
+      </example>
+      <example>
+        <title><tag>cmdsynopsis</tag> with mutually exclusive options</title>
+        <programlisting><![CDATA[
+<cmdsynopsis>
+  <command>bar</command>
+  <group choice="opt">
+    <arg choice="plain"><option>--help</option></arg>
+    <arg choice="plain"><option>-h</option></arg>
+  </group>
+  <group choice="opt">
+    <arg choice="plain"><option>-typea</option></arg>
+    <arg choice="plain"><option>-typeb</option></arg>
+    <arg choice="plain"><option>-typec</option></arg>
+  </group>
+  <arg choice="plain" rep="repeat"><replaceable>file</replaceable></arg>
+</cmdsynopsis>
+]]></programlisting>
+        <blockquote>
+          <cmdsynopsis>
+            <command>bar</command>
+            <group choice="opt">
+              <arg choice="plain"><option>-h</option></arg>
+              <arg choice="plain"><option>--help</option></arg>
+            </group>
+            <group choice="opt">
+              <arg choice="plain"><option>-typea</option></arg>
+              <arg choice="plain"><option>-typeb</option></arg>
+              <arg choice="plain"><option>-typec</option></arg>
+            </group>
+            <arg choice="plain" rep="repeat"><replaceable>file</replaceable></arg>
+          </cmdsynopsis>
+        </blockquote>
+      </example>
+      <example>
+        <title><tag>cmdsynopsis</tag> with options with arguments</title>
+        <para>
+          Options with arguments can be tricky. XSLT processors often treat
+          whitespace between DocBook tags the same way you may be used to with
+          HTML -- all consecutive whitespace (including newlines) is treated as
+          a single space. This means you have to intentionally put an equal sign
+          right next to the tag it goes with. This is shown below in the
+          <option>--e1opt</option> option. Then there is the issue of options
+          with a short and long form. Oftentimes the long form is separated from
+          its argument by an equal sign, but the short form by a space (or even
+          by no space at all). A suggested style is shown below with the
+          <option>--e2opt</option> option. 
+        </para>
+        <programlisting><![CDATA[
+<cmdsynopsis>
+  <command>baz</command>
+  <arg choice="opt"><option>--e1opt</option>=<replaceable>A</replaceable></arg>
+  <arg choice="opt">
+    <group choice="req">
+      <arg choice="plain"><option>-E</option></arg>
+      <arg choice="plain"><option>--e2opt</option></arg>
+    </group>=<replaceable>C</replaceable>
+  </arg>
+  <arg choice="opt"><option>-s1opt</option> <replaceable>B</replaceable></arg>
+  <arg choice="opt">
+    <group choice="req">
+      <arg choice="plain"><option>-S</option></arg>
+      <arg choice="plain"><option>-s2opt</option></arg>
+    </group> <replaceable>D</replaceable>
+  </arg>
+</cmdsynopsis>
+]]></programlisting>
+        <blockquote>
+          <cmdsynopsis>
+            <command>baz</command>
+            <arg choice="opt"><option>--e1opt</option>=<replaceable>A</replaceable></arg>
+            <arg choice="opt">
+              <group choice="req">
+                <arg choice="plain"><option>-E</option></arg>
+                <arg choice="plain"><option>--e2opt</option></arg>
+              </group>=<replaceable>C</replaceable>
+            </arg>
+            <arg choice="opt"><option>-s1opt</option> <replaceable>B</replaceable></arg>
+            <arg choice="opt">
+              <group choice="req">
+                <arg choice="plain"><option>-S</option></arg>
+                <arg choice="plain"><option>-s2opt</option></arg>
+              </group> <replaceable>D</replaceable>
+            </arg>
+          </cmdsynopsis>
+        </blockquote>
+      </example>
+      <example>
+        <title><tag>cmdsynopsis</tag> with nested options</title>
+        <para>
+          Nested options can be tricky as well, because an argument with
+          variable length (like a date/time specification) or one with a
+          variable number of space-separated tokens are likely to be rendered
+          the same:
+        </para>
+        <programlisting><![CDATA[
+<cmdsynopsis>
+  <command>qux</command>
+  <arg choice="opt">+<replaceable>yyyy</replaceable
+><arg choice="opt"><replaceable>mm</replaceable
+><arg choice="opt"><replaceable>dd</replaceable
+></arg></arg></arg>
+  <arg choice="opt"><replaceable>volume</replaceable
+> <arg choice="opt"><replaceable>issue</replaceable
+> <arg choice="opt"><replaceable>page</replaceable
+></arg></arg></arg>
+</cmdsynopsis>
+]]></programlisting>
+        <blockquote>
+          <cmdsynopsis>
+            <command>qux</command>
+            <arg choice="opt">+<replaceable>yyyy</replaceable
+><arg choice="opt"><replaceable>mm</replaceable
+><arg choice="opt"><replaceable>dd</replaceable
+></arg></arg></arg>
+            <arg choice="opt"><replaceable>volume</replaceable
+> <arg choice="opt"><replaceable>issue</replaceable
+> <arg choice="opt"><replaceable>page</replaceable
+></arg></arg></arg>
+          </cmdsynopsis>
+        </blockquote>
+        <para>
+          The recommended solution is to specify variable-length arguments
+          directly, including square brackets:
+        </para>
+        <programlisting><![CDATA[
+<cmdsynopsis>
+  <command>qux</command>
+  <arg choice="plain">[+<replaceable>yyyy</replaceable
+>[<replaceable>mm</replaceable
+>[<replaceable>dd</replaceable
+>]]]</arg>
+  <arg choice="opt"><replaceable>volume</replaceable
+> <arg choice="opt"><replaceable>issue</replaceable
+> <arg choice="opt"><replaceable>page</replaceable
+></arg></arg></arg>
+</cmdsynopsis>
+]]></programlisting>
+        <blockquote>
+          <cmdsynopsis>
+            <command>qux</command>
+            <arg choice="plain">[+<replaceable>yyyy</replaceable
+>[<replaceable>mm</replaceable
+>[<replaceable>dd</replaceable
+>]]]</arg>
+            <arg choice="opt"><replaceable>volume</replaceable
+> <arg choice="opt"><replaceable>issue</replaceable
+> <arg choice="opt"><replaceable>page</replaceable
+></arg></arg></arg>
+          </cmdsynopsis>
+        </blockquote>
+      </example>
 
     </section>
 
