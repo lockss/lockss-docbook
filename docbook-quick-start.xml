@@ -1248,43 +1248,4 @@ lock  log  mail  run  spool  tmp
 
   </appendix>
 
-  <appendix xml:id="cheatsheet">
-
-    <title>Cheat Sheet</title>
-
-    <programlisting><![CDATA[
-SECTIONS:
-<section>                               <sect1>
-  <title>...</title>                      <title>...</title>
-  <subtitle>...</subtitle>                <subtitle>...</subtitle>
-  <section>                               <sect2>
-    <!-- arbitrarily nestable -->           <!-- nestable to <sect5> -->
-  </section>                              </sect2>
-</section>                              </sect1>
-
-LISTS:
-<itemizedlist>                          <orderedlist>
-  <lisitem>                               <listitem>
-    <!-- content blocks -->                 <!-- content blocks -->
-  </listitem>                             </listitem>
-</itemizedlist>                         </orderedlist>
-
-<procedure>
-  <step>
-    <!-- content blocks -->
-  </step>
-  <step performance="optional">
-    <!-- content blocks -->
-  </step>
-</procedure>
-
-MULTI-LINE:
-<programlisting>Fixed-width font,       <literallayout>Normal font,
-   but line breaks     and whitespace      but line breaks     and whitespace
-  are     preserved</programlisting>      are     preserved</literallayout>
-
-]]></programlisting>
-
-  </appendix>
-
 </article>
