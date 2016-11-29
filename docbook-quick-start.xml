@@ -724,6 +724,282 @@ lock  log  mail  run  spool  tmp
    
     </section>
 
+    <section xml:id="cookbook-stepbystepinstructions">
+    
+      <title>Step-By-Step Instructions</title>
+      
+      <para>
+        To lay out step-by-step instructions, you can use DocBook's
+        <tag>procedure</tag> construct. A procedure consists of one or more
+        <tag>step</tag> tags.
+      </para>
+      <para>
+        By default a step is required, which is equivalent to setting its
+        <tag class="attribute">performance</tag> attribute to
+        <tag class="attvalue">required</tag>, or it can be marked optional,
+        which requires the attribute value <tag class="attvalue">optional</tag>
+        instead (and causes special rendering).
+      </para>
+      <para>
+        A step is either terminal, in which case it consists of blocks of
+        content (e.g. <tag>para</tag>), or a group of sequential sub-steps, in
+        which case it consists of a <tag>substeps</tag> tag, or a choice of one
+        alternative among several, in which case it consists of a
+        <tag>stepalternatives</tag> tag. Both <tag>substeps</tag> and
+        <tag>stepalternatives</tag> are simply containers of <tag>step</tag>
+        tags, and have the same <tag class="attribute">performance</tag>
+        attribute as the <tag>step</tag> tag to denote an optional grouping.
+      </para>
+      <example>
+        <title><tag>procedure</tag> example</title>
+        <programlisting><![CDATA[
+<procedure>
+  <step>
+    <para>
+      First step.
+    </para>
+  </step>
+  <step>
+    <para>
+      Second step:  
+    </para>
+    <substeps>
+      <step>
+        <para>
+          First this thing.
+        </para>
+      </step>
+      <step performance="optional">
+        <para>
+          Maybe this thing.
+        </para>
+      </step>
+      <step>
+        <para>
+          Finally this thing.
+        </para>
+      </step>
+    </substeps>
+  </step>
+  <step>
+    <para>
+      Depending on your OS:
+    </para>
+    <stepalternatives>
+      <step>
+        <para>
+          Do this ... if you use Linux.
+        </para>
+      </step>
+      <step>
+        <para>
+          Do this ... if you use Windows.
+        </para>
+      </step>
+      <step>
+        <para>
+          Do this ... if you use Mac OS.
+        </para>
+      </step>
+    </stepalternatives>
+  </step>
+</procedure>
+]]></programlisting>
+        <blockquote>
+          <procedure>
+            <step>
+              <para>
+                First step.
+              </para>
+            </step>
+            <step>
+              <para>
+                Second step:  
+              </para>
+              <substeps>
+                <step>
+                  <para>
+                    First this thing.
+                  </para>
+                </step>
+                <step performance="optional">
+                  <para>
+                    Maybe this thing.
+                  </para>
+                </step>
+                <step>
+                  <para>
+                    Finally this thing.
+                  </para>
+                </step>
+              </substeps>
+            </step>
+            <step>
+              <para>
+                Depending on your OS:
+              </para>
+              <stepalternatives>
+                <step>
+                  <para>
+                    Do this ... if you use Linux.
+                  </para>
+                </step>
+                <step>
+                  <para>
+                    Do this ... if you use Windows.
+                  </para>
+                </step>
+                <step>
+                  <para>
+                    Do this ... if you use Mac OS.
+                  </para>
+                </step>
+              </stepalternatives>
+            </step>
+          </procedure>
+        </blockquote>
+      </example>
+      
+    </section>
+
+    <section xml:id="cookbook-frequentlyaskedquestions">
+    
+      <title>Frequently-Asked Questions</title>
+      
+      <para>
+        DocBook offers a construct for sets of questions and answers, as might
+        often be needed to render a frequently-asked questions section in a
+        document, in the <tag>qandaset</tag> tag. It consists of
+        <tag>qandaentry</tag> tags, which can be grouped
+        into <tag>qandadiv</tag> sections that begin with a <tag>title</tag>
+        tag (and are nestable).
+      </para>
+      <para>
+        The <tag>qandaset</tag> tag has a
+        <tag class="attribute">defaultlabel</tag> attribute which determines how
+        the set is rendered, either <tag class="attvalue">none</tag> for no
+        decoration, or <tag class="attvalue">qanda</tag>
+        for "Q:" and "A:" markers, or <tag class="attvalue">number</tag> for
+        a numbered list.
+      </para>
+      <tip>
+        <para>
+          The default is <tag class="attvalue">number</tag>, which uses the
+          current section label (e.g. 4.2) to generate numbered section labels
+          (e.g. 4.2.1) and entry labels (e.g. 4.2.1.1). If this is cumbersome,
+          using <tag class="attvalue">qanda</tag> is the simplest, or
+          alternatively, using <tag class="attvalue">none</tag> and formatting
+          each question differently than normal text, for instance with
+          <tag>emphasis</tag>.
+        </para>
+      </tip>
+      <para>
+        A <tag>qandaentry</tag> tag contains a <tag>question</tag> tag, and zero
+        or more <tag>answer</tag> tags, and <tag>question</tag> and
+        <tag>answer</tag> tags contain blocks of content (e.g. <tag>para</tag>).
+      </para>
+      <example>
+        <title><tag>qandaset</tag> example</title>
+        <programlisting><![CDATA[
+ <qandaset>
+  <qandaentry>
+    <question>
+      <para>
+        What is this document?
+      </para>
+    </question>
+    <answer>
+      <para>
+        It's a DocBook primer. (See remark below.)
+      </para>
+    </answer>
+  </qandaentry>
+  <qandadiv>
+    <title>Software</title>
+    <qandaentry>
+      <question>
+        <para>
+          Does it work on Linux?
+        </para>
+      </question>
+      <answer>
+        <para>
+          Yes.
+        </para>
+      </answer>
+    </qandaentry>
+    <qandaentry>
+      <question>
+        <para>
+          Does it work on the Mac?
+        </para>
+      </question>
+      <answer>
+        <para>
+          Yes.
+        </para>
+      </answer>
+    </qandaentry>
+  </qandadiv>
+</qandaset>       
+]]></programlisting>
+        <blockquote>
+          <qandaset>
+            <qandaentry>
+              <question>
+                <para>
+                  What is this document?
+                </para>
+              </question>
+              <answer>
+                <para>
+                  It's a DocBook primer. (See remark below.)
+                </para>
+              </answer>
+            </qandaentry>
+            <qandadiv>
+              <title>Software</title>
+              <qandaentry>
+                <question>
+                  <para>
+                    Does it work on Linux?
+                  </para>
+                </question>
+                <answer>
+                  <para>
+                    Yes.
+                  </para>
+                </answer>
+              </qandaentry>
+              <qandaentry>
+                <question>
+                  <para>
+                    Does it work on the Mac?
+                  </para>
+                </question>
+                <answer>
+                  <para>
+                    Yes.
+                  </para>
+                </answer>
+              </qandaentry>
+            </qandadiv>
+          </qandaset>
+        </blockquote>
+        <note>
+          <para>
+            Typically, either all entries fall into a section, or none do, but
+            note that if there is a mix, the standalone questions appear at the
+            end, which is probably not what you intend. If you must have some
+            entries fall outside of any section, creating a section for those
+            entries is recommended as it enables you to put them in the intended
+            place.
+          </para>
+        </note>
+      </example>
+      
+    </section>
+
     <section xml:id="cookbook-documentingcommands">
     
       <title>Documenting Commands</title>
