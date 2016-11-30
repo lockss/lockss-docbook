@@ -859,6 +859,19 @@ lock  log  mail  run  spool  tmp
           </procedure>
         </blockquote>
       </example>
+      <tip>
+        <para>
+          DocBook offers an even more formal construct, the <tag>task</tag> tag.
+          A task consists of a title (<tag>title</tag>), an optional summary
+          (<tag>tasksummary</tag> containing content blocks), optional
+          pre-requisites (<tag>taskprerequisites</tag> containing content blocks),
+          a procedure (<tag>procedure</tag>), zero or more examples
+          (<tag>example</tag> containing content blocks), and an optional
+          follow-up section (<tag>taskrelated</tag> containing content blocks)
+          which can be used for verification steps, next steps, references to
+          external resources, etc.
+        </para>
+      </tip>
       
     </section>
 
@@ -1000,9 +1013,69 @@ lock  log  mail  run  spool  tmp
       
     </section>
 
-    <section xml:id="cookbook-documentingcommands">
+    <section xml:id="cookbook-definitionlist">
     
-      <title>Documenting Commands</title>
+      <title>Definition List</title>
+      
+      <para>
+        Among the various kinds of list constructs offered by DocBook is the
+        <tag>variablelist</tag> tag, which is used to mark up a definition list
+        (similar to HTML's <tag>dl</tag>). The <tag>variablelist</tag> tag
+        consists of <tag>varlistentry</tag> tags; the latter consist of one or
+        more <tag>term</tag> tags, and one <tag>listitem</tag> tag containing
+        content blocks (e.g. <tag>para</tag>). 
+      </para>
+      <example>
+        <title><tag>variablelist</tag> example</title>
+        <programlisting><![CDATA[
+<variablelist>
+  <varlistentry>
+    <term>Java</term>
+    <listitem>
+      <para>
+        A programming language.
+      </para>
+    </listitem>
+  </varlistentry>
+  <varlistentry>
+    <term>HTML</term>
+    <term>XHTML</term>
+    <listitem>
+      <para>
+        Markup languages for the Web.
+      </para>
+    </listitem>
+  </varlistentry>
+</variablelist>
+]]></programlisting>
+        <blockquote>
+          <variablelist>
+            <varlistentry>
+              <term>Java</term>
+              <listitem>
+                <para>
+                  A programming language.
+                </para>
+              </listitem>
+            </varlistentry>
+            <varlistentry>
+              <term>HTML</term>
+              <term>XHTML</term>
+              <listitem>
+                <para>
+                  Markup languages for the Web.
+                </para>
+              </listitem>
+            </varlistentry>
+          </variablelist>
+        </blockquote>
+      </example>
+      
+    </section>
+
+    <section xml:id="cookbook-commandsyntax">
+    
+      <title>Command Syntax</title>
       
       <para>
         DocBook offers many constructs to document the syntax of commands,
@@ -1236,6 +1309,95 @@ lock  log  mail  run  spool  tmp
         </blockquote>
       </example>
 
+    </section>
+
+    <section xml:id="cookbook-classdocumentation">
+    
+      <title>Class Documentation</title>
+      
+      <para>
+        DocBook offers rich structured markup to document object-oriented
+        classes, with the <tag>classsynopsis</tag> construct. It consists of:
+      </para>
+      <itemizedlist>
+        <listitem>
+          <para>
+            A class declaration or interface declaration or exception
+            declaration. This consists of a <tag>ooclass</tag> or
+            <tag>oointerface</tag> or <tag>ooexception</tag> tag (respectively),
+            containing zero or more <tag>modifier</tag> tags (e.g.
+            <code><![CDATA[<modifier>protected</modifier>]]></code>) and
+            a <tag>classname</tag> or <tag>interfacename</tag> or
+            <tag>exceptionname</tag> tag (respectively). 
+          </para>
+        </listitem>
+        <listitem>
+          <para>
+            Any number of field, method, constructor or destructor declarations,
+            denoted by <tag>fieldsynopsis</tag>,
+            <tag>methodsynopsis</tag>, <tag>constructorsynopsis</tag> or
+            <tag>destructorsynopsis</tag> (respectively).  
+          </para>
+        </listitem>
+      </itemizedlist>
+      <para>
+        A field synopsis consists of zero or more <tag>modifier</tag> tags,
+        an optional <tag>type</tag> tag, a <tag>varname</tag> tag for the name
+        of the field, and an optional <tag>initializer</tag> tag containing
+        arbitrary content (probably a <tag>code</tag> blurb) denoting the
+        initial value of the field.
+      </para>
+      <para>
+        A method synopsis consists of zero or more <tag>modifier</tag> tags,
+        optionally a <tag>type</tag> tag or the
+        <tag class="emptytag">void</tag> empty tag for the return type, a
+        <tag>methodname</tag> tag, one or more <tag>methodparam</tag> constructs
+        for the parameters or <tag class="emptytag">void</tag> if none, and zero
+        or more <tag>exceptionname</tag> tags for exceptions thrown. A
+        constructor or destructor synopsis is the same, except that there is
+        no return type and the method name is optional. 
+      </para>
+      <para>
+        A <tag>methodparam</tag> construct consists of zero or more
+        <tag>modifier</tag> tags, an optional <tag>type</tag> tag, and a
+        <tag>parameter</tag> tag.
+      </para>
+      <example>
+        <title><tag>classsynopsis</tag> example</title>
+        <blockquote>
+          <classsynopsis language="java">
+            <ooclass>
+              <modifier>public</modifier>
+              <classname>Foo</classname>
+            </ooclass>
+            <ooclass>
+              <classname>AbstractFoo</classname>
+            </ooclass>
+            <oointerface>
+              <interfacename>FooObserver</interfacename>
+            </oointerface>
+            <fieldsynopsis>
+              <modifier>private</modifier>
+              <modifier>static</modifier>
+              <modifier>final</modifier>
+              <type>AbstractFoo</type>
+              <varname>singleton</varname>
+            </fieldsynopsis>
+            <methodsynopsis>
+              <modifier>public</modifier>
+              <modifier>static</modifier>
+              <type>AbstractFoo</type>
+              <methodname>getInstance</methodname>
+              <methodparam>
+                <type>int</type>
+                <parameter>x</parameter>
+              </methodparam>
+              <exceptionname>NoClassDefFoundError</exceptionname>
+            </methodsynopsis>
+          </classsynopsis>
+        </blockquote>
+      </example>
+      
     </section>
 
   </section>

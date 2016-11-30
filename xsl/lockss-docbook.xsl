@@ -56,6 +56,11 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   <xsl:param name="admon.graphics.extension" select="'.svg'" />
 
   <!-- 
+        Make definition list items blocks, not inline
+  -->
+  <xsl:param name="variablelist.as.blocks" select="1" />
+
+  <!-- 
         <emphasis>: add role="italic" and make default role bold instead of italic
         Original at fo/inline.xsl lines 733-766
   -->
