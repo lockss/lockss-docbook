@@ -54,7 +54,7 @@ PdfDoc()
   PDF=`dirname "${XML}"`/`basename "${XML}" .xml`.pdf
   FOP_PARAMS="-param admon.graphics.path ${DOCBOOKXSL_HOME}/images/colorsvg/"
   if [ ! -f "${PDF}" -o "${XML}" -nt "${PDF}" ]; then
-    FOP_OPTS='-Djava.awt.headless=true -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog -Dorg.apache.commons.logging.simplelog.defaultlog=WARN' "${FOP}" $FOP_PARAMS -xml "${XML}" -xsl "${DOCBOOKXSL_FO}" -pdf "${PDF}"
+    CLASSPATH="${MY_HOME}/lib/xslthl/xslthl-2.1.3.jar" FOP_OPTS="-Djava.awt.headless=true -Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.SimpleLog -Dorg.apache.commons.logging.simplelog.defaultlog=WARN -Dxslthl.config=file://${DOCBOOKXSL_HOME}/highlighting/xslthl-config.xml" "${FOP}" $FOP_PARAMS -xml "${XML}" -xsl "${DOCBOOKXSL_FO}" -pdf "${PDF}"
   fi
 }
 

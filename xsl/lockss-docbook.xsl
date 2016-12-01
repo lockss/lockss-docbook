@@ -41,18 +41,24 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
         Start with fo/docbook.xsl as a base
   -->
   <xsl:import href="../lib/docbook-xsl-ns/fo/docbook.xsl" />
+  <xsl:import href="../lib/docbook-xsl-ns/fo/highlight.xsl" />
 
   <!-- 
         Turn section numbering on
   -->
   <xsl:param name="section.autolabel" select="1" />
 
+  <!-- 
+        Enable syntax highlighting
+        Passing xslthl.config via makedoc
+  -->
+  <xsl:param name="highlight.source" select="1" />
+
   <!--
         Enable pretty admonition graphics
+        Passing admon.graphics.path via makedoc
   -->
   <xsl:param name="admon.graphics" select="1" />
-  <!--  couldn't figure out what path to supply, passing via makedoc -->
-  <!-- <xsl:param name="admon.graphics.path" select="'../lib/docbook-xsl-ns/images/colorsvg/'" /> -->
   <xsl:param name="admon.graphics.extension" select="'.svg'" />
 
   <!-- 
@@ -212,5 +218,5 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
       </xsl:otherwise>
     </xsl:choose>
   </xsl:template>
- 
+
 </xsl:stylesheet>
