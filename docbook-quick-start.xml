@@ -1311,93 +1311,78 @@ lock  log  mail  run  spool  tmp
 
     </section>
 
-    <section xml:id="cookbook-classdocumentation">
+    <section xml:id="cookbook-syntaxhighlighting">
     
-      <title>Class Documentation</title>
+      <title>Syntax Highlighting</title>
       
       <para>
-        DocBook offers rich structured markup to document object-oriented
-        classes, with the <tag>classsynopsis</tag> construct. It consists of:
-      </para>
-      <itemizedlist>
-        <listitem>
-          <para>
-            A class declaration or interface declaration or exception
-            declaration. This consists of a <tag>ooclass</tag> or
-            <tag>oointerface</tag> or <tag>ooexception</tag> tag (respectively),
-            containing zero or more <tag>modifier</tag> tags (e.g.
-            <code><![CDATA[<modifier>protected</modifier>]]></code>) and
-            a <tag>classname</tag> or <tag>interfacename</tag> or
-            <tag>exceptionname</tag> tag (respectively). 
-          </para>
-        </listitem>
-        <listitem>
-          <para>
-            Any number of field, method, constructor or destructor declarations,
-            denoted by <tag>fieldsynopsis</tag>,
-            <tag>methodsynopsis</tag>, <tag>constructorsynopsis</tag> or
-            <tag>destructorsynopsis</tag> (respectively).  
-          </para>
-        </listitem>
-      </itemizedlist>
-      <para>
-        A field synopsis consists of zero or more <tag>modifier</tag> tags,
-        an optional <tag>type</tag> tag, a <tag>varname</tag> tag for the name
-        of the field, and an optional <tag>initializer</tag> tag containing
-        arbitrary content (probably a <tag>code</tag> blurb) denoting the
-        initial value of the field.
-      </para>
-      <para>
-        A method synopsis consists of zero or more <tag>modifier</tag> tags,
-        optionally a <tag>type</tag> tag or the
-        <tag class="emptytag">void</tag> empty tag for the return type, a
-        <tag>methodname</tag> tag, one or more <tag>methodparam</tag> constructs
-        for the parameters or <tag class="emptytag">void</tag> if none, and zero
-        or more <tag>exceptionname</tag> tags for exceptions thrown. A
-        constructor or destructor synopsis is the same, except that there is
-        no return type and the method name is optional. 
-      </para>
-      <para>
-        A <tag>methodparam</tag> construct consists of zero or more
-        <tag>modifier</tag> tags, an optional <tag>type</tag> tag, and a
-        <tag>parameter</tag> tag.
+        The <tag>programlisting</tag> environment accepts a
+        <tag class="attribute">language</tag> attribute that turns on syntax
+        highlighting for selected languages (using the <package>xslthl</package>
+        module). If left unspecified, no syntax highlighting occurs; if set to
+        an unrecognized value, the default is <tag class="attvalue">java</tag>
+        for Java. Some of the included highlighters include
+        <tag class="attvalue">java</tag>, <tag class="attvalue">python</tag>,
+        <tag class="attvalue">perl</tag>, <tag class="attvalue">c</tag>,
+        <tag class="attvalue">cpp</tag>, <tag class="attvalue">csharp</tag>,
+        <tag class="attvalue">ruby</tag>, <tag class="attvalue">lua</tag>,
+        <tag class="attvalue">javascript</tag>, <tag class="attvalue">xml</tag>
+        (suitable for HTML), <tag class="attvalue">css</tag>,
+        <tag class="attvalue">php</tag>, as well as
+        <tag class="attvalue">bourne</tag> for Bourne Shell (suitable for a
+        useful amount of Shell scripting), and <tag class="attvalue">sql</tag>
+        for SQL2003 (or explicitly <tag class="attvalue">sql92</tag>,
+        <tag class="attvalue">sql1999</tag> or
+        <tag class="attvalue">sql2003</tag>).
       </para>
       <example>
-        <title><tag>classsynopsis</tag> example</title>
+        <title>Syntax highlighting example</title>
+        <programlisting><![CDATA[
+<programlisting language="java">
+/**
+  * Javadoc
+  * @since 1.2
+  */
+public class Foo extends Bar, Baz implements Qux {
+
+  @Annotation
+  private static final Foo singleton; // Comment
+
+  /* Comment */  
+  public static Foo getInstance() {
+    if (singleton == null) {
+      System.out.println("string");
+      // ...
+    }
+    return singleton;
+  }
+
+}</programlisting>
+]]></programlisting>
         <blockquote>
-          <classsynopsis language="java">
-            <ooclass>
-              <modifier>public</modifier>
-              <classname>Foo</classname>
-            </ooclass>
-            <ooclass>
-              <classname>AbstractFoo</classname>
-            </ooclass>
-            <oointerface>
-              <interfacename>FooObserver</interfacename>
-            </oointerface>
-            <fieldsynopsis>
-              <modifier>private</modifier>
-              <modifier>static</modifier>
-              <modifier>final</modifier>
-              <type>AbstractFoo</type>
-              <varname>singleton</varname>
-            </fieldsynopsis>
-            <methodsynopsis>
-              <modifier>public</modifier>
-              <modifier>static</modifier>
-              <type>AbstractFoo</type>
-              <methodname>getInstance</methodname>
-              <methodparam>
-                <type>int</type>
-                <parameter>x</parameter>
-              </methodparam>
-              <exceptionname>NoClassDefFoundError</exceptionname>
-            </methodsynopsis>
-          </classsynopsis>
+          <programlisting language="java">
+/**
+  * Javadoc
+  * @since 1.2
+  */
+public class Foo extends Bar, Baz implements Qux {
+
+  @Annotation
+  private static final Foo singleton; // Comment
+
+  /* Comment */  
+  public static Foo getInstance() {
+    if (singleton == null) {
+      System.out.println("string");
+      // ...
+    }
+    return singleton;
+  }
+
+}</programlisting>
         </blockquote>
       </example>
-      
+
     </section>
 
   </section>
