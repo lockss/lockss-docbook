@@ -13,7 +13,7 @@ REM  distributed under the License is distributed on an "AS IS" BASIS,
 REM  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 REM  See the License for the specific language governing permissions and
 REM  limitations under the License.
-REM  $Id: fop.bat 1390331 2012-09-26 08:50:07Z mehdi $
+REM  $Id: fop.bat 1736993 2016-03-29 09:19:30Z ssteiner $
 
 SETLOCAL ENABLEDELAYEDEXPANSION
 
@@ -56,7 +56,7 @@ rem set LOGLEVEL=-Dorg.apache.commons.logging.simplelog.defaultlog=INFO
 set LIBDIR=%LOCAL_FOP_HOME%lib
 
 set LOCALCLASSPATH=%FOP_HYPHENATION_PATH%
-for %%l in (%LOCAL_FOP_HOME%build\*.jar %LIBDIR%\*.jar) do set LOCALCLASSPATH=!LOCALCLASSPATH!;%%l
+for %%l in (%LOCAL_FOP_HOME%build\*.jar %LIBDIR%\*.jar %LOCAL_FOP_HOME%target\*.jar) do set LOCALCLASSPATH=!LOCALCLASSPATH!;%%l
 
 set JAVAOPTS=-Denv.windir=%WINDIR%
 

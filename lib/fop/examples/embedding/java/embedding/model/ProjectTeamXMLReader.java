@@ -15,12 +15,11 @@
  * limitations under the License.
  */
 
-/* $Id: ProjectTeamXMLReader.java 679326 2008-07-24 09:35:34Z vhennebert $ */
+/* $Id: ProjectTeamXMLReader.java 1804125 2017-08-04 14:15:05Z ssteiner $ */
 
 package embedding.model;
 
 //Java
-import java.util.Iterator;
 import java.io.IOException;
 
 //SAX
@@ -87,9 +86,8 @@ public class ProjectTeamXMLReader extends AbstractObjectReader {
 
         handler.startElement("projectteam");
         handler.element("projectname", projectTeam.getProjectName());
-        Iterator i = projectTeam.getMembers().iterator();
-        while (i.hasNext()) {
-            ProjectMember member = (ProjectMember)i.next();
+        for (Object o : projectTeam.getMembers()) {
+            ProjectMember member = (ProjectMember) o;
             generateFor(member);
         }
         handler.endElement("projectteam");
