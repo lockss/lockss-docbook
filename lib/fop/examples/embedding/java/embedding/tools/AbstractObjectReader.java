@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-/* $Id: AbstractObjectReader.java 679326 2008-07-24 09:35:34Z vhennebert $ */
+/* $Id: AbstractObjectReader.java 1827406 2018-03-21 12:19:52Z ssteiner $ */
 
 package embedding.tools;
 
@@ -121,21 +121,21 @@ public abstract class AbstractObjectReader implements XMLReader {
     /**
      * @see org.xml.sax.XMLReader#getProperty(String)
      */
-    public Object getProperty(java.lang.String name) {
+    public Object getProperty(String name) {
         return null;
     }
 
     /**
      * @see org.xml.sax.XMLReader#setProperty(String, Object)
      */
-    public void setProperty(java.lang.String name, java.lang.Object value) {
+    public void setProperty(String name, Object value) {
     }
 
     /**
      * @see org.xml.sax.XMLReader#getFeature(String)
      */
-    public boolean getFeature(java.lang.String name) {
-        return ((Boolean) features.get(name)).booleanValue();
+    public boolean getFeature(String name) {
+        return (Boolean) features.get(name);
     }
 
     /**
@@ -157,8 +157,8 @@ public abstract class AbstractObjectReader implements XMLReader {
     /**
      * @see org.xml.sax.XMLReader#setFeature(String, boolean)
      */
-    public void setFeature(java.lang.String name, boolean value) {
-        this.features.put(name, new Boolean(value));
+    public void setFeature(String name, boolean value) {
+        this.features.put(name, value);
     }
 
     /**

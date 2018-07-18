@@ -15,7 +15,7 @@
  * limitations under the License.
  */
 
-/* $Id: ExampleConcat.java 1356646 2012-07-03 09:46:41Z mehdi $ */
+/* $Id: ExampleConcat.java 1804125 2017-08-04 14:15:05Z ssteiner $ */
 
 package embedding.intermediate;
 
@@ -160,8 +160,8 @@ public class ExampleConcat {
             IFConcatenator concatenator = new IFConcatenator(targetHandler, null);
 
             //Iterate over all intermediate files
-            for (int i = 0; i < files.length; i++) {
-                Source src = new StreamSource(files[i]);
+            for (File file : files) {
+                Source src = new StreamSource(file);
                 concatenator.appendDocument(src);
             }
 
