@@ -2,7 +2,7 @@
 
 <!-- 
 
-Copyright (c) 2000-2016, Board of Trustees of Leland Stanford Jr. University
+Copyright (c) 2000-2017, Board of Trustees of Leland Stanford Jr. University
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
@@ -60,6 +60,29 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
   -->
   <xsl:param name="admon.graphics" select="1" />
   <xsl:param name="admon.graphics.extension" select="'.svg'" />
+
+  <!-- 
+       Give verbatim listings shading
+  -->
+  <xsl:param name="shade.verbatim" select="1" />
+
+  <!-- 
+       Make verbatim font size smaller to approximate body font
+       Original at fo/param.xsl lines 454-458
+  -->
+  <xsl:attribute-set name="monospace.properties">
+    <xsl:attribute name="font-family">
+      <xsl:value-of select="$monospace.font.family"/>
+    </xsl:attribute>
+    <xsl:attribute name="font-size">
+      <xsl:text>85%</xsl:text>
+    </xsl:attribute>
+  </xsl:attribute-set>
+
+  <!--
+        Cross-references only use the numbering, not the title  
+  -->
+  <xsl:param name="xref.with.number.and.title" select="0" />
 
   <!-- 
         Make definition list items blocks, not inline
