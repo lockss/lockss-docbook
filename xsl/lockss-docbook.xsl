@@ -74,7 +74,9 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
     <xsl:attribute name="font-family">
       <xsl:value-of select="$monospace.font.family"/>
     </xsl:attribute>
-    <xsl:attribute name="font-size"><xsl:value-of select="$body.font.master * 0.85"/><xsl:text>pt</xsl:text></xsl:attribute>
+    <xsl:attribute name="font-size">
+      <xsl:text>85%</xsl:text>
+    </xsl:attribute>
   </xsl:attribute-set>
 
   <!--
